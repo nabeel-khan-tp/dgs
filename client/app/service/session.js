@@ -2,12 +2,13 @@ angular.module('dgs').factory('session',function($cookieStore) {
 
 	var session = {};
 
-	session.create = function(userId,userRole){
-		console.log("Creating session for "+userId+":"+userRole);
+	session.create = function(userId,token){
+		console.log("Creating session for "+userId+":"+token);
 		$cookieStore.put('userId',userId);
-		$cookieStore.put('userRole',userRole);
+		$cookieStore.put('token',token);
 		this.userId = userId;
-		this.userRole = userRole;
+		this.token = token;
+		//this.userRole = userRole;
 	};
 
 	session.hasUserId = function(){
@@ -16,7 +17,8 @@ angular.module('dgs').factory('session',function($cookieStore) {
 		else
 		{
 			this.userId = $cookieStore.get("userId");
-			this.userRole = $cookieStore.get("userRole");
+			//this.userRole = $cookieStore.get("userRole");
+			this.token = $cookieStore.get("token");
 
 			if(this.userId)
 			{
@@ -30,9 +32,11 @@ angular.module('dgs').factory('session',function($cookieStore) {
 
 	session.destroy = function(){
 		$cookieStore.remove("userId");
-		$cookieStore.remove("userRole");
+		$cookieStore.remove("token");
+		//$cookieStore.remove("userRole");
 		this.userId = null;
-		this.userRole = null;
+		this.token = null;
+		//this.userRole = null;
 	};
 	return session;
 });

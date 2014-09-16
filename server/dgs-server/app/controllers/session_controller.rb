@@ -1,5 +1,10 @@
 class SessionController < ApplicationController
   skip_before_filter :verify_authenticity_token
+  
+  def index
+  	render nothing: true
+  end
+
   def create
     user = User.where("email = ? AND password = ?", params[:email], params[:password]).first
     if user

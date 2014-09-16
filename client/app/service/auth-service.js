@@ -9,20 +9,9 @@ angular.module('dgs').factory('authService',function($http,session) {
 		return $http
 				.post(authService.API_URL+'/session',credentials)
 				.then(function(res){
-					//if()
-					//console.log(res);
-					/*var user = Object();
-					user.user_id=1;
-					user.email=res.email;
-					return user;*/
-					console.log(res);
+					session.create(res.data.user.id,res.data.authentication_key);
 					return res;
-					//session.create(res.data.user.user_id,res.data.user.role);
-					//return res;
-					//session.create(res.user.id,res.user.role);
-					//return res.data.user;
 				});
-		//return {user_id:2};
 	};
 
 	authService.register = function(credentials){

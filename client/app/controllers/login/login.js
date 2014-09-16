@@ -11,18 +11,19 @@ angular.module('dgs').controller('LoginCtrl',function($scope,$rootScope,$state,$
     console.log(res);
     //console.log(res.data.status);
     //console.log(res.data);
-    /*if(res.data.status==201)
+    if(res.status==200)
     {
       $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
       
-      console.log(res.data.user.user_id + " "+ res.data.user.email);
+      console.log(res.data.user.id + " "+ res.data.user.email);
       $scope.setCurrentUser(res.data.user);
+      $scope.setAuthToken(res.data.authentication_key);
       $state.go("home");
     }else
     {
       $scope.errorOnLogin = true;
       $scope.errorMessage = res.data.message;
-    }*/
+    }
 	},
 	function(){
 		$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
