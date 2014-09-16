@@ -41,6 +41,7 @@ class LogsController < ApplicationController
   private
 
   def log_params
-    params.require(:log).permit(:device_id, :message)
+    # params.require(:log).permit(:device_id, :message)
+    params.permit(:device_id, :message)
   end
 end

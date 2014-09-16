@@ -41,6 +41,7 @@ class PermissionsController < ApplicationController
   private
 
   def permission_params
-    params.require(:permission).permit(:name)
+    # params.require(:permission).permit(:name)
+    params.permit(:name)
   end
 end

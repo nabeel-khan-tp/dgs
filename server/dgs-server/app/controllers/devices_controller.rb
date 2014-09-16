@@ -41,6 +41,8 @@ class DevicesController < ApplicationController
   private
 
   def device_params
-    params.require(:device).permit(:user_id, :location_id, :device_name, :space_available, :total_space_allocated, :status, :uptime)
+    # params.require(:device).permit(:user_id, :location_id, :device_name, :space_available, :total_space_allocated, :status, :uptime)
+    params.permit(:user_id, :location_id, :device_name, :space_available, :total_space_allocated, :status, :uptime)
+
   end
 end

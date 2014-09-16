@@ -41,6 +41,7 @@ class BackupSchedulesController < ApplicationController
   private
 
   def backup_schedule_params
-    params.require(:backup_schedule).permit(:user_id, :device_id, :backup_type, :status, :title)
+    # params.require(:backup_schedule).permit(:user_id, :device_id, :backup_type, :status, :title)
+    params.permit(:user_id, :device_id, :backup_type, :status, :title)
   end
 end
