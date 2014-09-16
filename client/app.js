@@ -21,10 +21,10 @@ angular.module('dgs').config(function($stateProvider, $urlRouterProvider,$httpPr
 
     $stateProvider.state('home', {
         url: '/home',
-        templateUrl: 'app/controllers/home/home.html',
-        data:{
+        templateUrl: 'app/controllers/home/home.html'
+        /*data:{
           authorizedRoles:[USER_ROLES.admin,USER_ROLES.editor]
-        }
+        }*/
     });
     $stateProvider.state('home.users', {
         url: '/users',
@@ -52,12 +52,17 @@ angular.module('dgs').controller('applicationController', function ($scope,$root
                                                USER_ROLES,AUTH_EVENTS,
                                                authService) {
   $scope.currentUser = null;
+  $scope.authToken = null;
   $scope.userRoles = USER_ROLES;
   $scope.isAuthorized = authService.isAuthorized();
   $scope.isAuthenticated = authService.isAuthenticated();
 
   $scope.setCurrentUser = function (user) {
     $scope.currentUser = user;
+  };
+
+  $scope.setAuthToken = function(token){
+    $scope.authToken = token;
   };
 
   $scope.logout = function(){
@@ -93,8 +98,9 @@ angular.module('dgs').run(function($rootScope) {
 angular.module('dgs').run(function ($rootScope,$injector, AUTH_EVENTS, authService,$state,USER_ROLES) {
   
   $injector.get("$http").defaults.transformRequest = function(data, headersGetter) {
-        if ($rootScope.oauth) 
-            headersGetter()['Authorization'] = "Bearer "+$rootScope.oauth.access_token;
+        console.log("sending token with http");
+        if ($rootScope.authToken) 
+            headersGetter()['Authorization'] = "Bearer "+$rootScope.authToken;
         if (data) {
             return angular.toJson(data);
         }

@@ -4,7 +4,7 @@ class UsersController < ApplicationController
    # in home_controller.rb
   def index
     @users = User.all
-    render json: @users
+    render json: @users.to_json
   end
 
   def show
