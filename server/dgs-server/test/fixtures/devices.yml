@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  location_id: 1
+  device_name: MyString
+  space_available: 9.99
+  total_space_allocated: 9.99
+  status: 1
+  uptime: 2014-09-16 12:55:16
+
+two:
+  user_id: 1
+  location_id: 1
+  device_name: MyString
+  space_available: 9.99
+  total_space_allocated: 9.99
+  status: 1
+  uptime: 2014-09-16 12:55:16
