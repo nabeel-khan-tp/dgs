@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   skip_before_filter :verify_authenticity_token
-
+  
+   # in home_controller.rb
   def index
     @users = User.all
     render json: @users
@@ -41,6 +42,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:role_id, :first_name, :last_name, :email, :password)
+    #params.require(:user).permit(:role_id, :first_name, :last_name, :email, :password)
+    params.permit(:role_id, :first_name, :last_name, :email, :password)
   end
 end

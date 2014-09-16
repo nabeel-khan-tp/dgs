@@ -14,8 +14,10 @@ angular.module('dgs').constant('AUTH_EVENTS', {
   guest: 'guest'
 });
 
+angular.module('dgs').config(function($stateProvider, $urlRouterProvider,$httpProvider,USER_ROLES) {
 
-angular.module('dgs').config(function($stateProvider, $urlRouterProvider,USER_ROLES) {
+    //delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    //$httpProvider.defaults.useXDomain = true
 
     $stateProvider.state('home', {
         url: '/home',
