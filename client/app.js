@@ -90,7 +90,16 @@ angular.module('dgs').run(function($rootScope) {
 
 });
 
-angular.module('dgs').run(function ($rootScope, AUTH_EVENTS, authService,$state,USER_ROLES) {
+angular.module('dgs').run(function ($rootScope,$injector, AUTH_EVENTS, authService,$state,USER_ROLES) {
+  
+  $injector.get("$http").defaults.transformRequest = function(data, headersGetter) {
+        if ($rootScope.oauth) 
+            headersGetter()['Authorization'] = "Bearer "+$rootScope.oauth.access_token;
+        if (data) {
+            return angular.toJson(data);
+        }
+    };
+
   $rootScope.$on('$stateChangeStart', function (event, next) {
     
     var authorizedRoles = null;

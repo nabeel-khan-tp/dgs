@@ -7,7 +7,7 @@ angular.module('dgs').factory('authService',function($http,session) {
 
 	authService.login = function(credentials){
 		return $http
-				.post(authService.API_URL+'/login',credentials)
+				.post(authService.API_URL+'/session',credentials)
 				.then(function(res){
 					//if()
 					//console.log(res);
@@ -15,8 +15,10 @@ angular.module('dgs').factory('authService',function($http,session) {
 					user.user_id=1;
 					user.email=res.email;
 					return user;*/
-					session.create(res.data.user.user_id,res.data.user.role);
+					console.log(res);
 					return res;
+					//session.create(res.data.user.user_id,res.data.user.role);
+					//return res;
 					//session.create(res.user.id,res.user.role);
 					//return res.data.user;
 				});
@@ -28,10 +30,13 @@ angular.module('dgs').factory('authService',function($http,session) {
 	return $http
       .post(authService.API_URL+'/users', credentials)
       .then(function (res) {
-        session.create(res.data.user_id,res.data.role);
+        
+		console.log(res);
+
+        /*session.create(res.data.user_id,res.data.role);
         /*Session.create(res.data.id, res.data.user.id,
-                       res.data.user.role);
-        return res.data.user;*/
+                       res.data.user.role);*/
+        //return res.data.user;
         //console.log(res);
         return res.data.user_id;
 		});

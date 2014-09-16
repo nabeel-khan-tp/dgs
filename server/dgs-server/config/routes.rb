@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   match 'locations', to: 'locations#index', via: [:options]
   resources :locations
 
+  match 'session', to: 'session#index', via: [:options]
   post 'session' => 'session#create'
   
   # The priority is based upon order of creation: first created -> highest priority.
