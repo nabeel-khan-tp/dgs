@@ -15,8 +15,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      @user.session_api_key
-      render json: @user
+      auth_key = @user.session_api_key
+      render json: {user: @user, auth_key: auth_key}
     else
       render json: {message: 'Something went wrong while creating user'}
     end
