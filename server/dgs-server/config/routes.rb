@@ -1,17 +1,24 @@
 Rails.application.routes.draw do
+
+  match 'backup_schedules', to: 'backup_schedules#index', via: [:options]
   resources :backup_schedules
 
+  match 'logs', to: 'logs#index', via: [:options]
   resources :logs
 
+  match 'devices', to: 'devices#index', via: [:options]
   resources :devices
 
+  match 'permissions', to: 'permissions#index', via: [:options]
   resources :permissions
 
+  match 'roles', to: 'roles#index', via: [:options]
   resources :roles
 
   match 'users', to: 'users#index', via: [:options]
   resources :users
 
+  match 'locations', to: 'locations#index', via: [:options]
   resources :locations
 
   
