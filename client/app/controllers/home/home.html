@@ -1,0 +1,38 @@
+<div class="col-md-12" ng-controller="HomeCtrl">
+
+<div class="row">
+	<div class="col-md-3">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Welcome {{currentUser.email}}</h3>
+		  </div>
+		  <div class="panel-body">
+		    <ul class="nav nav-pills nav-stacked">
+		    	<li><a ui-sref="home.users">Users</a></li>
+		    	<li><a href="#">Locations</a></li>
+		    	<li><a href="#">Devices</a></li>
+			</ul>
+		  </div>
+		</div>
+	</div>
+	<div class="col-md-6">
+
+		<div ui-view></div>
+		<!--
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Users</h3>
+		  </div>
+		  <div class="panel-body" style="padding:0px">
+			<div ui-view>
+		  </div>
+		</div>
+		-->
+
+	</div>
+</div>
+
+<!--This is home and current user_id = {{ currentUser.user_id }}-->
+
+
+</div>

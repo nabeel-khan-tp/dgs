@@ -1,0 +1,21 @@
+<div class="row" ng-controller="UserNewCtrl">
+	<div class="col-md-12">
+		<form role="form">
+			<div class="form-group">
+			<label for="exampleInputEmail1">Name</label>
+			<input type="text" class="form-control" ng-model="newuser.name" placeholder="Enter Name">
+			</div>
+			<div class="form-group">
+			<label for="exampleInputEmail1">Email address</label>
+			<input type="email" class="form-control" ng-model="newuser.email" placeholder="Enter email">
+			</div>
+			<div class="form-group">
+			<label for="exampleInputPassword1">Password</label>
+			<input type="password" class="form-control" ng-model="newuser.password" placeholder="Password">
+			</div>
+			
+			<button type="submit" class="btn btn-default" ng-click="createUser(newuser)">Create</button>
+		</form>
+
+	</div>
+</div>
