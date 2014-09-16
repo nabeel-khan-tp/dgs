@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :api_keys
+  
   match 'backup_schedules', to: 'backup_schedules#index', via: [:options]
   resources :backup_schedules
 
@@ -21,8 +23,8 @@ Rails.application.routes.draw do
   match 'locations', to: 'locations#index', via: [:options]
   resources :locations
 
+  post 'session' => 'session#create'
   
-            
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
