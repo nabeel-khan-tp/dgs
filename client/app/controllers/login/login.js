@@ -8,9 +8,10 @@ angular.module('dgs').controller('LoginCtrl',function($scope,$rootScope,$state,$
   
   authService.login(credentials).then(function(res){
     
-    console.log(res.data.status);
-    console.log(res.data);
-    if(res.data.status==201)
+    console.log(res);
+    //console.log(res.data.status);
+    //console.log(res.data);
+    /*if(res.data.status==201)
     {
       $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
       
@@ -21,7 +22,7 @@ angular.module('dgs').controller('LoginCtrl',function($scope,$rootScope,$state,$
     {
       $scope.errorOnLogin = true;
       $scope.errorMessage = res.data.message;
-    }
+    }*/
 	},
 	function(){
 		$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
