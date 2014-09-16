@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   resources :api_keys
   
   match 'backup_schedules', to: 'backup_schedules#index', via: [:options]
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
 
   match 'locations', to: 'locations#index', via: [:options]
   resources :locations
+
 
   match 'session', to: 'session#index', via: [:options]
   post 'session' => 'session#create'
