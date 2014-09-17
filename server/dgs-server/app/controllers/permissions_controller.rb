@@ -1,6 +1,7 @@
 class PermissionsController < ApplicationController
   skip_before_filter :verify_authenticity_token
-
+  before_filter :ensure_authenticated_user
+  
   def index
     @permissions = Permission.all
     render json: @permissions

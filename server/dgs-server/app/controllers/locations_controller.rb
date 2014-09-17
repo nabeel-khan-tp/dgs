@@ -1,6 +1,6 @@
 class LocationsController < ApplicationController
   skip_before_filter :verify_authenticity_token
-  before_filter :ensure_authenticated_user, only: [:index]
+  before_filter :ensure_authenticated_user
 
   def index
     @locations = Location.all

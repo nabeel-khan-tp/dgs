@@ -1,6 +1,7 @@
 class LogsController < ApplicationController
   skip_before_filter :verify_authenticity_token
-
+  before_filter :ensure_authenticated_user
+  
   def index
     @logs = Log.all
     render json: @logs
