@@ -15,7 +15,17 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    render json: @user.to_json
+    @role = @user.role
+    @permissions = @role.permissions
+
+    @role_info ={}
+    @permissions_info = {}
+    @permissions.each do |p|
+      @permissions_info.merge!(id: p.id, name: p.name)
+    end
+    @role_info.merge!(id: @role.id, name: @role.name, permissions: @permissions)
+    @user_info = {id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, role: @role_info}
+    render json: @user_info.to_json
   end
 
   def create
