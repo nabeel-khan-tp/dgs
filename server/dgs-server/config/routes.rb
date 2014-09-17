@@ -4,26 +4,31 @@ Rails.application.routes.draw do
   resources :api_keys
   
   match 'backup_schedules', to: 'backup_schedules#options', via: [:options]
+  match 'backup_schedules/:id', to: 'backup_schedules#options', via: [:options]
   resources :backup_schedules
 
   match 'logs', to: 'logs#options', via: [:options]
+  match 'logs/:id', to: 'logs#options', via: [:options]
   resources :logs
 
   match 'devices', to: 'devices#options', via: [:options]
+  match 'devices/:id', to: 'devices#options', via: [:options]
   resources :devices
 
   match 'permissions', to: 'permissions#options', via: [:options]
+  match 'permissions/:id', to: 'permissions#options', via: [:options]
   resources :permissions
 
   match 'roles', to: 'roles#options', via: [:options]
+  match 'roles/:id', to: 'roles#options', via: [:options]
   resources :roles
 
   match 'users', to: 'users#options', via: [:options]
   match 'users/:id', to: 'users#options', via: [:options]
-  
   resources :users
 
   match 'locations', to: 'locations#options', via: [:options]
+  match 'locations/:id', to: 'locations#options', via: [:options]
   resources :locations
 
 

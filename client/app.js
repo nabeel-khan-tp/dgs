@@ -30,6 +30,11 @@ angular.module('dgs').config(function($stateProvider, $urlRouterProvider,$httpPr
         url: '/users',
         templateUrl: 'app/controllers/users/users.html'
     });
+
+    $stateProvider.state('home.locations', {
+        url: '/locations',
+        templateUrl: 'app/controllers/locations/locations.html'
+    });
    
     $stateProvider.state('register', {
         url: '/register',
@@ -81,7 +86,7 @@ angular.module('dgs').controller('applicationController', function ($scope,$root
     console.log("Login successful event fired");
     //alert("event triggered");
   });
-});
+})
 
 angular.module('dgs').run(function($rootScope) {
 
@@ -115,33 +120,8 @@ angular.module('dgs').run(function ($rootScope,$injector, AUTH_EVENTS, authServi
 
   $rootScope.$on('$stateChangeStart', function (event, next) {
     
-    /*var authorizedRoles = null;
-
-    if (typeof(next.data) !== 'undefined' && typeof(next.data.authorizedRoles) !== 'undefined')
-    {
-      authorizedRoles = next.data.authorizedRoles;
-    }
-    else
+    if(typeof(next.isPublic)!=='undefined' && next.isPublic==true)
       return;
-
-    if (!authService.isAuthorized(authorizedRoles)) {
-      event.preventDefault();
-      if (authService.isAuthenticated()) {
-        // user is not allowed
-        $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
-        console.log("Not allowed to view this page "+next.url);
-      } else {
-        // user is not logged in
-        $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
-        console.log("User not logged in so show him the login page");
-        $state.go("login");
-      }
-    }*/
-
-    if(typeof(next.isPublic)!=='undefined' && next.isPublic===true)
-    {
-      return;
-    }
 
     if (!authService.isAuthenticated()) {
       event.preventDefault();
