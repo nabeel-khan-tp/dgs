@@ -81,7 +81,7 @@ angular.module('dgs').controller('applicationController', function ($scope,$root
     console.log("Login successful event fired");
     //alert("event triggered");
   });
-})
+});
 
 angular.module('dgs').run(function($rootScope) {
 
@@ -138,8 +138,10 @@ angular.module('dgs').run(function ($rootScope,$injector, AUTH_EVENTS, authServi
       }
     }*/
 
-    if(typeof(next.isPublic)!=='undefined' && next.isPublic==true)
+    if(typeof(next.isPublic)!=='undefined' && next.isPublic===true)
+    {
       return;
+    }
 
     if (!authService.isAuthenticated()) {
       event.preventDefault();

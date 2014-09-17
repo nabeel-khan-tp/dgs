@@ -46,7 +46,7 @@ module.exports = function (grunt) {
       dist: {
         options: {
           base: 'dist/',
-	  port: 9001
+          port: 9001
         }
       }
     },
@@ -206,6 +206,7 @@ module.exports = function (grunt) {
   grunt.registerTask('live',function(){
 	grunt.task.run(['build', 'connect:dist:keepalive']);
   });
+
 
   grunt.event.on('watch', function(action, filepath) {
     //https://github.com/gruntjs/grunt-contrib-watch/issues/156

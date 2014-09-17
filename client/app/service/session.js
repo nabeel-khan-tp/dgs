@@ -17,16 +17,20 @@ angular.module('dgs').factory('session',function($cookieStore) {
 	};
 
 	session.hasUserId = function(){
-		if(typeof(this.userId)!='undefined' && this.userId)
+		if(typeof(this.userId)!=='undefined' && this.userId){
 			return this.userId;
+		}
 		else
 		{
 			
 			if(typeof($cookieStore.get("userId"))!=='undefined')
+			{
 				this.userId = $cookieStore.get("userId");
+			}
 			
-			if(typeof($cookieStore.get("user"))!=='undefined')
+			if(typeof($cookieStore.get("user"))!=='undefined'){
 				this.user = $cookieStore.get("user");
+			}
 			
 			//this.userRole = $cookieStore.get("userRole");
 			if(typeof($cookieStore.get("token"))!=='undefined')
@@ -40,24 +44,29 @@ angular.module('dgs').factory('session',function($cookieStore) {
 				console.log("Reading user_id from cookies and found it");
 				return true;
 			}
-			else
+			else{
 				return false;
+			}
 			
 		}
 	};
 
 	session.currentUser = function(){
-		if(this.hasUserId())
+		if(this.hasUserId()){
 			return this.user;
-		else
+		}
+		else{
 			return false;
+		}
 	};
 
 	session.authToken = function(){
-		if(this.hasUserId())
+		if(this.hasUserId()){
 			return this.token;
-		else
+		}
+		else{
 			return '';
+		}
 	};
 
 	session.destroy = function(){

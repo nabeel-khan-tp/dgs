@@ -9,7 +9,7 @@ angular.module('dgs').controller('LoginCtrl',function($scope,$rootScope,$state,$
     authService.login(credentials).then(function(res){
       
       //console.log(res);
-      if(res.status==200)
+      if(res.status===200)
       {
         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
         

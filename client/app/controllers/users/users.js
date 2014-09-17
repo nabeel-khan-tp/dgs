@@ -2,7 +2,7 @@ angular.module('dgs').controller('UsersCtrl',function($scope,$state,userService,
 
 	$scope.showIndex = true;
 	$scope.currentUser = {first_name:"",last_name:"",email:"",password:""};
-	$scope.page = {current:1,total_items:20,items_per_page:2}
+	$scope.page = {current:1,total_items:20,items_per_page:2};
 	$scope.isEditing = false;
 
 	userService.query(function(data){
@@ -40,11 +40,11 @@ angular.module('dgs').controller('UsersCtrl',function($scope,$state,userService,
 		$scope.isEditing = true;
 		$scope.currentUser = user;
 		//$state.go();	
-	}
+	};
 
 	$scope.cancelUserForm = function(){
 		$scope.showIndex = true;
 		$scope.newuser = {first_name:"",last_name:"",email:"",password:""};
-	}
+	};
 
 });
