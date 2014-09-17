@@ -3,29 +3,29 @@ Rails.application.routes.draw do
 
   resources :api_keys
   
-  match 'backup_schedules', to: 'backup_schedules#index', via: [:options]
+  match 'backup_schedules', to: 'backup_schedules#options', via: [:options]
   resources :backup_schedules
 
-  match 'logs', to: 'logs#index', via: [:options]
+  match 'logs', to: 'logs#options', via: [:options]
   resources :logs
 
-  match 'devices', to: 'devices#index', via: [:options]
+  match 'devices', to: 'devices#options', via: [:options]
   resources :devices
 
-  match 'permissions', to: 'permissions#index', via: [:options]
+  match 'permissions', to: 'permissions#options', via: [:options]
   resources :permissions
 
-  match 'roles', to: 'roles#index', via: [:options]
+  match 'roles', to: 'roles#options', via: [:options]
   resources :roles
 
   match 'users', to: 'users#options', via: [:options]
   resources :users
 
-  match 'locations', to: 'locations#index', via: [:options]
+  match 'locations', to: 'locations#options', via: [:options]
   resources :locations
 
 
-  match 'session', to: 'session#index', via: [:options]
+  match 'session', to: 'session#options', via: [:options]
   post 'session' => 'session#create'
   
   # The priority is based upon order of creation: first created -> highest priority.

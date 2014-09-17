@@ -1,6 +1,10 @@
 class LogsController < ApplicationController
   skip_before_filter :verify_authenticity_token
-  before_filter :ensure_authenticated_user
+  before_filter :ensure_authenticated_user, except: [:options]
+
+  def options
+    render text: ''
+  end
   
   def index
     @logs = Log.all.order("id").page(params[:page]).per_page(5)

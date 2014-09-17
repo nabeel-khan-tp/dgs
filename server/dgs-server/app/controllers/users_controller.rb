@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   def options
     render text: ''
   end
+  
    # in home_controller.rb
   def index
     @users = User.all.order("id").page(params[:page]).per_page(5)
