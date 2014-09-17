@@ -19,11 +19,11 @@ class UsersController < ApplicationController
     @permissions = @role.permissions
 
     @role_info ={}
-    @permissions_info = {}
+    @permissions_info = []
     @permissions.each do |p|
-      @permissions_info.merge!(id: p.id, name: p.name)
+      @permissions_info.push(id: p.id, name: p.name)
     end
-    @role_info.merge!(id: @role.id, name: @role.name, permissions: @permissions)
+    @role_info.merge!(id: @role.id, name: @role.name, permissions: @permissions_info)
     @user_info = {id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, role: @role_info}
     render json: @user_info.to_json
   end
