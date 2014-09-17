@@ -9,7 +9,10 @@ angular.module('dgs').factory('authService',function($http,session) {
 		return $http
 				.post(authService.API_URL+'/session',credentials)
 				.then(function(res){
-					session.create(res.data.user.id,res.data.user,res.data.authentication_key);
+					
+					console.log(res);
+
+					session.create(res.data.user.id,res.data.user,res.data.auth_key.access_token);
 					return res;
 				});
 	};
@@ -20,8 +23,8 @@ angular.module('dgs').factory('authService',function($http,session) {
       .post(authService.API_URL+'/users', credentials)
       .then(function (res) {
         
-		console.log(res);
-		session.create(res.data.user.id,res.data.user,res.data.authentication_key);
+		//console.log(res);
+		session.create(res.data.user.id,res.data.user,res.data.auth_key.access_token);
         return res;
 		});
   	};

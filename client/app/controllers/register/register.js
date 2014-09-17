@@ -3,17 +3,14 @@ angular.module('dgs').controller('RegisterCtrl',function($scope,$rootScope,$stat
   $scope.credentials = {first_name:'',last_name:'',email: '',password: ''};
 
   $scope.register = function(credentials){
-  		authService.register(credentials).then(function(user_id){
+  		authService.register(credentials).then(function(res){
   			
-        console.log(user_id);
-        /*console.log("User registered with user_id="+user_id);
+        //console.log(user_id);
+        console.log("User registered with user_id="+res.data.user.id);
   			$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
       		
-      		var user = {};
-      		user.user_id = user_id;
-
-      		$scope.setCurrentUser(user);
-      		$state.go("home");*/
+      	$scope.setCurrentUser(res.data.user);
+      	$state.go("home");
   		});
   };
 

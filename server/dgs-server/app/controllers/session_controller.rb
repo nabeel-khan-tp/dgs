@@ -1,6 +1,10 @@
 class SessionController < ApplicationController
   skip_before_filter :verify_authenticity_token
   
+  def options
+    render text: ''
+  end
+  
   def index
   	render nothing: true
   end

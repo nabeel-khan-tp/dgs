@@ -50,9 +50,14 @@ angular.module('dgs').config(function($stateProvider, $urlRouterProvider,$httpPr
 
 });
 
-angular.module('dgs').controller('applicationController', function ($scope,$rootScope,$state,
+angular.module('dgs').controller('applicationController', function ($scope,$rootScope,$state,$cookieStore,
                                                USER_ROLES,AUTH_EVENTS,
                                                authService) {
+  
+    /*$cookieStore.remove("userId");
+    $cookieStore.remove("token");
+    $cookieStore.remove("user");
+*/
   $scope.currentUser = authService.currentUser();
   $rootScope.authToken = authService.authToken();
   $scope.userRoles = USER_ROLES;
