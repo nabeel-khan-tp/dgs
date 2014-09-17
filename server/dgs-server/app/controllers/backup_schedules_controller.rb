@@ -4,12 +4,12 @@ class BackupSchedulesController < ApplicationController
   
   def index
     @backup_schedules = BackupSchedule.all
-    render json: @backup_schedules
+    render json: @backup_schedules.to_json
   end
 
   def show
     @backup_schedule = BackupSchedule.find(params[:id])
-    render json: @backup_schedule
+    render json: @backup_schedule.to_json
   end
 
   def create

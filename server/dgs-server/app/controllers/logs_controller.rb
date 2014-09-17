@@ -3,13 +3,13 @@ class LogsController < ApplicationController
   before_filter :ensure_authenticated_user
   
   def index
-    @logs = Log.all
-    render json: @logs
+    @logs = Log.all.order("id").page(params[:page]).per_page(5)
+    render json: @logs.to_json
   end
 
   def show
     @log = Log.find(params[:id])
-    render json: @log
+    render json: @log.to_json
   end
 
   def create

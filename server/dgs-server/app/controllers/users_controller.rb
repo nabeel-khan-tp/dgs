@@ -1,19 +1,19 @@
 class UsersController < ApplicationController
   skip_before_filter :verify_authenticity_token
-  before_filter :ensure_authenticated_user , except: [:options]
+  before_filter :ensure_authenticated_user , except: [:options,:create]
   
   def options
     render text: ''
   end
    # in home_controller.rb
   def index
-    @users = User.all
+    @users = User.all.order("id").page(params[:page]).per_page(5)
     render json: @users.to_json
   end
 
   def show
     @user = User.find(params[:id])
-    render json: @user
+    render json: @user.to_json
   end
 
   def create

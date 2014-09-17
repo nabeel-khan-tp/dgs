@@ -4,12 +4,12 @@ class RolesController < ApplicationController
   
   def index
     @roles = Role.all
-    render json: @roles
+    render json: @roles.to_json
   end
 
   def show
     @role = Role.find(params[:id])
-    render json: @role
+    render json: @role.to_json
   end
 
   def create
