@@ -4,13 +4,13 @@ class UsersController < ApplicationController
   
    # in home_controller.rb
   def index
-    @users = User.all
+    @users = User.all.order("id").page(params[:page]).per_page(5)
     render json: @users.to_json
   end
 
   def show
     @user = User.find(params[:id])
-    render json: @user
+    render json: @user.to_json
   end
 
   def create

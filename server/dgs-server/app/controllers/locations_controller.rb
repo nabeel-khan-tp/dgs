@@ -3,13 +3,13 @@ class LocationsController < ApplicationController
   before_filter :ensure_authenticated_user
 
   def index
-    @locations = Location.all
-    render json: @locations
+    @locations = Location.all.order("id").page(params[:page]).per_page(5)
+    render json: @locations.to_json
   end
 
   def show
     @location = Location.find(params[:id])
-    render json: @location
+    render json: @location.to_json
   end
 
   def create
