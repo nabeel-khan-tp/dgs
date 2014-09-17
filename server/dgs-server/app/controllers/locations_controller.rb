@@ -17,7 +17,7 @@ class LocationsController < ApplicationController
     if @location.save
       render json: @location
     else
-      render json: {message: 'Something went wrong while creating location'}
+      render json: {message: @location.errors.full_messages}
     end
   end
 
@@ -26,7 +26,7 @@ class LocationsController < ApplicationController
     if @location.update_attributes(location_params)
       render json: @location
     else
-      render json: {message: 'Something went wrong while updating location'}
+      render json: {message: @location.errors.full_messages}
     end
   end
 

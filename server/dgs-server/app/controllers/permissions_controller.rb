@@ -17,7 +17,7 @@ class PermissionsController < ApplicationController
     if @permission.save
       render json: @permission
     else
-      render json: {message: 'Something went wrong while creating permission'}
+      render json: {message: @permission.errors.full_messages}
     end
   end
 
@@ -26,7 +26,7 @@ class PermissionsController < ApplicationController
     if @permission.update_attributes(permission_params)
       render json: @permission
     else
-      render json: {message: 'Something went wrong while updating permission'}
+      render json: {message: @permission.errors.full_messages}
     end
   end
 

@@ -17,7 +17,7 @@ class RolesController < ApplicationController
     if @role.save
       render json: @role
     else
-      render json: {message: 'Something went wrong while creating role'}
+      render json: {message: @role.errors.full_messages}
     end
   end
 
@@ -26,7 +26,7 @@ class RolesController < ApplicationController
     if @role.update_attributes(role_params)
       render json: @role
     else
-      render json: {message: 'Something went wrong while updating role'}
+      render json: {message: @role.errors.full_messages}
     end
   end
 

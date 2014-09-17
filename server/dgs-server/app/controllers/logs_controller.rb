@@ -17,7 +17,7 @@ class LogsController < ApplicationController
     if @log.save
       render json: @log
     else
-      render json: {message: 'Something went wrong while creating log'}
+      render json: {message: @log.errors.full_messages}
     end
   end
 
@@ -26,7 +26,7 @@ class LogsController < ApplicationController
     if @log.update_attributes(log_params)
       render json: @log
     else
-      render json: {message: 'Something went wrong while updating log'}
+      render json: {message: @log.errors.full_messages}
     end
   end
 

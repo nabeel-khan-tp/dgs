@@ -16,7 +16,7 @@ class DevicesController < ApplicationController
     if @device.save
       render json: @device
     else
-      render json: {message: 'Something went wrong while creating device'}
+      render json: {message: @device.errors.full_messages}
     end
   end
 
@@ -25,7 +25,7 @@ class DevicesController < ApplicationController
     if @device.update_attributes(device_params)
       render json: @device
     else
-      render json: {message: 'Something went wrong while updating device'}
+      render json: {message: @device.errors.full_messages}
     end
   end
 

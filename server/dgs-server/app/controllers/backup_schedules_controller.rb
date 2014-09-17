@@ -17,7 +17,7 @@ class BackupSchedulesController < ApplicationController
     if @backup_schedule.save
       render json: @backup_schedule
     else
-      render json: {message: 'Something went wrong while creating backup schedule'}
+      render json: {message: @backup_schedule.errors.full_messages}
     end
   end
 
@@ -26,7 +26,7 @@ class BackupSchedulesController < ApplicationController
     if @backup_schedule.update_attributes(backup_schedule_params)
       render json: @backup_schedule
     else
-      render json: {message: 'Something went wrong while updating backup schedule'}
+      render json: {message: @backup_schedule.errors.full_messages}
     end
   end
 

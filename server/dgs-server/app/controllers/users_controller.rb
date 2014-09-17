@@ -19,7 +19,7 @@ class UsersController < ApplicationController
       auth_key = @user.session_api_key
       render json: {user: @user, auth_key: auth_key}
     else
-      render json: {message: 'Something went wrong while creating user'}
+      render json: {message: @user.errors.full_messages}
     end
   end
 
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     if @user.update_attributes(user_params)
       render json: @user
     else
-      render json: {message: 'Something went wrong while updating user'}
+      render json: {message: @user.errors.full_messages}
     end
   end
 
