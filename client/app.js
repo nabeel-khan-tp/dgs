@@ -46,6 +46,10 @@ angular.module('dgs').config(function($stateProvider, $urlRouterProvider,$httpPr
         templateUrl: 'app/controllers/login/login.html',
         isPublic:true
     });
+    $stateProvider.state('home.devices', {
+        url: '/devices',
+        templateUrl: 'app/controllers/devices/devices.html'
+    });
     /* Add New States Above */
     $urlRouterProvider.otherwise('/home');
 
