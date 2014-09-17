@@ -4,20 +4,25 @@ class ApplicationController < ActionController::Base
 	protect_from_forgery with: :null_session
 
 	before_filter :allow_cors
+  #after_filter :allow_cors
 
 	def allow_cors
 	  headers["Access-Control-Allow-Origin"] = "*"
-	  headers["Access-Control-Allow-Methods"] = %w{GET POST PUT DELETE OPTIONS}.join(",")
-	  headers["Access-Control-Allow-Headers"] =
+	  headers["Access-Control-Allow-Methods"] = %w{GET POST PUT UPDATE DELETE OPTIONS}.join(",")
+	  headers["Access-Control-Allow-Headers"] = 
 	    %w{Origin Accept Authorization Content-Type X-Requested-With X-CSRF-Token}.join(",")
 
-	  #head(:ok) if request.request_method == "OPTIONS"
+	  head(:ok) if request.request_method == "OPTIONS"
 	  # or, render text: ''
 	  # if that's more your style
 	end
 
   def ensure_authenticated_user
-    head :unauthorized unless current_user
+    if request.request_method == "OPTIONS"
+      head(:ok)
+    else
+      head :unauthorized unless current_user
+    end
   end
 
   # Returns the active user associated with the access token if available
