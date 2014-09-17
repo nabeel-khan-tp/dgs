@@ -13,6 +13,8 @@ angular.module('dgs').controller('LoginCtrl',function($scope,$rootScope,$state,$
       {
         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
         
+        console.log(res);
+
         console.log(res.data.user.id + " "+ res.data.user.email);
         $scope.setCurrentUser(res.data.user);
         $scope.setAuthToken(res.data.auth_key.access_token);
