@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   skip_before_filter :verify_authenticity_token
   before_filter :ensure_authenticated_user , except: [:options,:create]
-  
+  #after_filter :allow_cors
+
   def options
     render text: ''
   end
