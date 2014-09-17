@@ -1,6 +1,11 @@
 class DevicesController < ApplicationController
   skip_before_filter :verify_authenticity_token
-  before_filter :ensure_authenticated_user
+  before_filter :ensure_authenticated_user, except: [:options]
+
+  def options
+    render text: ''
+  end
+  
   def index
     @devices = Device.all.order("id").page(params[:page]).per_page(5)
     render json: @devices.to_json
