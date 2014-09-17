@@ -2,8 +2,12 @@
 
 <form role="form" ng-submit="register(credentials)">
   <div class="form-group">
-    <label for="exampleInputEmail1">Name</label>
-    <input type="text" class="form-control" ng-model="credentials.name" id="exampleInputName1" placeholder="Enter name">
+    <label for="exampleInputEmail1">First Name</label>
+    <input type="text" class="form-control" ng-model="credentials.first_name" id="exampleInputName1" placeholder="Enter name">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Last Name</label>
+    <input type="text" class="form-control" ng-model="credentials.last_name" id="exampleInputName1" placeholder="Enter name">
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
@@ -16,7 +20,7 @@
  
   <div class="checkbox">
     <label>
-      <input type="checkbox"> Check me out
+      <input type="checkbox"> Remember Me
     </label>
   </div>
   <button type="submit" class="btn btn-default">Register</button>

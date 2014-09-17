@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   match 'roles', to: 'roles#index', via: [:options]
   resources :roles
 
-  match 'users', to: 'users#index', via: [:options]
+  match 'users', to: 'users#options', via: [:options]
   resources :users
 
   match 'locations', to: 'locations#index', via: [:options]

@@ -37,11 +37,13 @@ angular.module('dgs').config(function($stateProvider, $urlRouterProvider,$httpPr
 
     $stateProvider.state('register', {
         url: '/register',
-        templateUrl: 'app/controllers/register/register.html'
+        templateUrl: 'app/controllers/register/register.html',
+        isPublic:true
     });
     $stateProvider.state('login', {
         url: '/login',
-        templateUrl: 'app/controllers/login/login.html'
+        templateUrl: 'app/controllers/login/login.html',
+        isPublic:true
     });
     /* Add New States Above */
     $urlRouterProvider.otherwise('/home');
@@ -51,8 +53,8 @@ angular.module('dgs').config(function($stateProvider, $urlRouterProvider,$httpPr
 angular.module('dgs').controller('applicationController', function ($scope,$rootScope,$state,
                                                USER_ROLES,AUTH_EVENTS,
                                                authService) {
-  $scope.currentUser = null;
-  $scope.authToken = null;
+  $scope.currentUser = authService.currentUser();
+  $rootScope.authToken = authService.authToken();
   $scope.userRoles = USER_ROLES;
   $scope.isAuthorized = authService.isAuthorized();
   $scope.isAuthenticated = authService.isAuthenticated();
@@ -98,9 +100,13 @@ angular.module('dgs').run(function($rootScope) {
 angular.module('dgs').run(function ($rootScope,$injector, AUTH_EVENTS, authService,$state,USER_ROLES) {
   
   $injector.get("$http").defaults.transformRequest = function(data, headersGetter) {
-        console.log("sending token with http");
+        console.log("sending token with http" + $rootScope.authToken);
+            
         if ($rootScope.authToken) 
-            headersGetter()['Authorization'] = "Bearer "+$rootScope.authToken;
+        {
+            console.log("sending token with http" + $rootScope.authToken);
+            headersGetter()['Authorization'] = $rootScope.authToken;
+        }
         if (data) {
             return angular.toJson(data);
         }
@@ -108,7 +114,7 @@ angular.module('dgs').run(function ($rootScope,$injector, AUTH_EVENTS, authServi
 
   $rootScope.$on('$stateChangeStart', function (event, next) {
     
-    var authorizedRoles = null;
+    /*var authorizedRoles = null;
 
     if (typeof(next.data) !== 'undefined' && typeof(next.data.authorizedRoles) !== 'undefined')
     {
@@ -129,6 +135,19 @@ angular.module('dgs').run(function ($rootScope,$injector, AUTH_EVENTS, authServi
         console.log("User not logged in so show him the login page");
         $state.go("login");
       }
+    }*/
+
+    if(typeof(next.isPublic)!=='undefined' && next.isPublic==true)
+      return;
+
+    if (!authService.isAuthenticated()) {
+      event.preventDefault();
+      // user is not logged in
+      $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+      console.log("User not logged in so show him the login page");
+      $state.go("login");
     }
+
+
   });
 });

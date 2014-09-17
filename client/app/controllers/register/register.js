@@ -1,6 +1,6 @@
 angular.module('dgs').controller('RegisterCtrl',function($scope,$rootScope,$state,$http,AUTH_EVENTS,authService){
 
-  $scope.credentials = {name:'',email: '',password: ''};
+  $scope.credentials = {first_name:'',last_name:'',email: '',password: ''};
 
   $scope.register = function(credentials){
   		authService.register(credentials).then(function(user_id){

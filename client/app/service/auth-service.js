@@ -9,7 +9,7 @@ angular.module('dgs').factory('authService',function($http,session) {
 		return $http
 				.post(authService.API_URL+'/session',credentials)
 				.then(function(res){
-					session.create(res.data.user.id,res.data.authentication_key);
+					session.create(res.data.user.id,res.data.user,res.data.authentication_key);
 					return res;
 				});
 	};
@@ -21,13 +21,8 @@ angular.module('dgs').factory('authService',function($http,session) {
       .then(function (res) {
         
 		console.log(res);
-
-        /*session.create(res.data.user_id,res.data.role);
-        /*Session.create(res.data.id, res.data.user.id,
-                       res.data.user.role);*/
-        //return res.data.user;
-        //console.log(res);
-        return res.data.user_id;
+		session.create(res.data.user.id,res.data.user,res.data.authentication_key);
+        return res;
 		});
   	};
 
@@ -35,19 +30,26 @@ angular.module('dgs').factory('authService',function($http,session) {
   		session.destroy();
   	}
 
+  	authService.currentUser = function(){
+  		return session.currentUser();
+  	};
+
+  	authService.authToken = function(){
+  		return session.authToken();
+  	};
 
 	authService.isAuthenticated = function(){
 		return session.hasUserId();
 	};
 
 	authService.isAuthorized = function(authorizedRoles){
-		if(!angular.isArray(authorizedRoles)){
+		/*if(!angular.isArray(authorizedRoles)){
 			authorizedRoles = [authorizedRoles];
 		}
 
 		return (authService.isAuthenticated() && authorizedRoles.indexOf(session.userRole) !== -1);
-		
-		//return authService.isAuthenticated();
+		*/
+		return authService.isAuthenticated();
 	};
 
 	return authService;
