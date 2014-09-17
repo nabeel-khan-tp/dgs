@@ -1,6 +1,10 @@
 class SessionController < ApplicationController
   skip_before_filter :verify_authenticity_token
   
+  def options
+    render text: ''
+  end
+  
   def index
   	render nothing: true
   end
@@ -13,12 +17,12 @@ class SessionController < ApplicationController
           api_key = user.api_keys.first
           api_key.expired_at = 4.days.from_now
           api_key.save!
-          render json: {authentication_key: api_key.access_token, status: 201, user: user}
+          render json: {auth_key: api_key, status: 201, user: user}
         else
-          render json: {authentication_key: user.api_keys.first.access_token, status: 201, user: user}
+          render json: {auth_key: user.api_keys.first, status: 201, user: user}
         end
       else
-        render json: {authentication_key: user.session_api_key.access_token, status: 201, user: user}
+        render json: {auth_key: user.session_api_key, status: 201, user: user}
       end
     else
       render json: {}, status: 401

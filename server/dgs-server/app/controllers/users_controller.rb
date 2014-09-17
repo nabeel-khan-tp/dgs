@@ -30,10 +30,10 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
+    if @user.update(user_params)
       render json: @user
     else
-      render json: {message: @user.errors.full_messages}
+      render json: {message: @user.errors.full_messages,params: params.inspect}
     end
   end
 
@@ -50,6 +50,6 @@ class UsersController < ApplicationController
 
   def user_params
     # params.require(:user).permit(:role_id, :first_name, :last_name, :email, :password)
-    params.permit(:role_id, :first_name, :last_name, :email, :password)
+    params.permit(:id,:role_id, :first_name, :last_name, :email, :password)
   end
 end

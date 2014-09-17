@@ -30,11 +30,7 @@ angular.module('dgs').config(function($stateProvider, $urlRouterProvider,$httpPr
         url: '/users',
         templateUrl: 'app/controllers/users/users.html'
     });
-    $stateProvider.state('home.users.new', {
-        url: '/new',
-        templateUrl: 'app/controllers/users/new/user-new.html'
-    });
-
+   
     $stateProvider.state('register', {
         url: '/register',
         templateUrl: 'app/controllers/register/register.html',
@@ -50,9 +46,14 @@ angular.module('dgs').config(function($stateProvider, $urlRouterProvider,$httpPr
 
 });
 
-angular.module('dgs').controller('applicationController', function ($scope,$rootScope,$state,
+angular.module('dgs').controller('applicationController', function ($scope,$rootScope,$state,$cookieStore,
                                                USER_ROLES,AUTH_EVENTS,
                                                authService) {
+  
+    /*$cookieStore.remove("userId");
+    $cookieStore.remove("token");
+    $cookieStore.remove("user");
+*/
   $scope.currentUser = authService.currentUser();
   $rootScope.authToken = authService.authToken();
   $scope.userRoles = USER_ROLES;
