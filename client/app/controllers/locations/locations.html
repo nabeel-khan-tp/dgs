@@ -1,0 +1,66 @@
+<div ng-controller="LocationsCtrl">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Locations</h3>
+    </div>
+    <div class="panel-body" style="padding:0px">
+
+      <div ng-show="showIndex">
+        <div style="padding:10px">
+          <div class="pull-left">
+            <button class="btn btn-primary" ng-click="newLocationForm()">Add</button>
+          </div>
+          <div class="pull-right">
+            <input type="text" placeholder="Search" class="form-control" ng-model="search" />
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <table class="table table-striped" style="margin-bottom:0px">
+          <tr>
+            <th>Name</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Actions</th>
+          </tr>
+          <tr ng-repeat="location in locations | filter:search"  ng-animate="'animate'">
+            <td>{{location.name}}</td>
+            <td>{{location.lat}}</td>
+            <td>{{location.lng}}</td>
+            <td><a href="javascript:;" ng-click="editLocationForm(location)"><span class="fa fa-edit"></span></a></td>
+          </tr>
+        </table>
+        <div style="padding:10px; padding-top:0px">
+          <pagination page="page.current" total-items="page.total_items" items-per-page="page.items_per_page"></pagination>
+          
+        </div>
+      </div>
+      <div style="padding:10px" ng-hide="showIndex">
+        <form role="form">
+          <div class="form-group">
+          <label for="exampleInputEmail1">Name</label>
+          <input type="text" class="form-control" ng-model="currentLocation.name" placeholder="Enter Name">
+          </div>
+          <div class="form-group">
+          <label for="exampleInputEmail1">Latitude</label>
+          <input type="text" class="form-control" ng-model="currentLocation.lat" placeholder="Enter Latitude">
+          </div>
+          <div class="form-group">
+          <label for="exampleInputEmail1">Longitude</label>
+          <input type="text" class="form-control" ng-model="currentLocation.lng" placeholder="Enter Longitude">
+          </div>          
+          
+          <button ng-show="!isEditing" type="submit" class="btn btn-primary" ng-click="createLocation(currentLocation)">Create</button>
+          <button ng-show="isEditing" type="submit" class="btn btn-primary" ng-click="updateLocation(currentLocation)">Update</button>
+          
+          <button type="submit" class="btn btn-default" ng-click="cancelLocationForm()">Cancel</button>
+        </form>
+
+      </div>
+      
+    </div>
+  </div>
+
+  
+
+</div>
