@@ -3,7 +3,8 @@ angular.module('dgs').factory('authService',function($http,session) {
 	var authService = {};
 
 	//authService.API_URL = 'http://localhost:8080/api';
-	authService.API_URL = 'http://localhost:3000';
+	//authService.API_URL = 'http://localhost:3000';
+	authService.API_URL = 'http://safe-reef-1442.herokuapp.com';
 
 	authService.login = function(credentials){
 		return $http

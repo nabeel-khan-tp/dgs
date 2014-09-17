@@ -30,11 +30,7 @@ angular.module('dgs').config(function($stateProvider, $urlRouterProvider,$httpPr
         url: '/users',
         templateUrl: 'app/controllers/users/users.html'
     });
-    $stateProvider.state('home.users.new', {
-        url: '/new',
-        templateUrl: 'app/controllers/users/new/user-new.html'
-    });
-
+   
     $stateProvider.state('register', {
         url: '/register',
         templateUrl: 'app/controllers/register/register.html',
