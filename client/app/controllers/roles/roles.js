@@ -6,13 +6,13 @@ angular.module('dgs').controller('RolesCtrl',function($scope,$state,roleService,
 	$scope.isEditing = false;
 
 	roleService.query(function(data){
-		$scope.roles = data;
-		$scope.page.total_items = $scope.roles.length;
+		$scope.roles = data.roles;
+		$scope.page.total_items = data.count;
 	});
 
 	$scope.pageChanged = function(page){
       	roleService.query({page:page},function(data){
-      		$scope.roles = data;
+      		$scope.roles = data.roles;
     	});
   	};
 

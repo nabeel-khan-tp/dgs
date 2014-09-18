@@ -2,21 +2,21 @@ angular.module('dgs').controller('UsersCtrl',function($scope,$state,userService,
 
 	$scope.showIndex = true;
 	$scope.currentUser = {first_name:"",last_name:"",email:"",password:""};
-	$scope.page = {current:1,total_items:20,items_per_page:2};
+	$scope.page = {current:1,total_items:0,items_per_page:10};
 	$scope.isEditing = false;
 
 	userService.query(function(data){
-		$scope.users = data;
-		$scope.page.total_items = $scope.users.length;
+		$scope.users = data.users;
+		$scope.page.total_items = data.count;
 	});
 
 	roleService.query(function(data){
-		$scope.roles = data;
+		$scope.roles = data.roles;
 	});
 
 	$scope.pageChanged = function(page){
       	userService.query({page:page},function(data){
-      		$scope.users = data;
+      		$scope.users = data.users;
     	});
   	};
 
