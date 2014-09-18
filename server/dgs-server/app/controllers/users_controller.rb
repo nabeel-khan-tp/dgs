@@ -36,6 +36,7 @@ class UsersController < ApplicationController
       @role_info.merge!(id: @role.id, name: @role.name, permissions: @permissions_info)
       @user_info = {id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, role: @role_info}
     else
+      @role_info ={}
       @user_info = {id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, role: @role_info}
     end
      render json: @user_info.to_json
