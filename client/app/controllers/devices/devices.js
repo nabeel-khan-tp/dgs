@@ -6,8 +6,10 @@ angular.module('dgs').controller('DevicesCtrl',function($scope,$state,deviceServ
   $scope.isEditing = false;
 
   deviceService.query(function(data){
-    $scope.devices = data;
-    $scope.page.total_items = $scope.devices.length;
+    
+    console.log(data.count);
+    $scope.devices = data.devices;
+    $scope.page.total_items = data.count;//$scope.devices.length;
   });
 
   locationService.query(function(data){
