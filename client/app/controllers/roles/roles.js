@@ -12,7 +12,7 @@ angular.module('dgs').controller('RolesCtrl',function($scope,$state,roleService,
 
 	$scope.pageChanged = function(page){
       	roleService.query({page:page},function(data){
-      		$scope.roles = data;
+      		$scope.roles = data.roles;
     	});
   	};
 

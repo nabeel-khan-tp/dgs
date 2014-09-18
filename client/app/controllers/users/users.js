@@ -11,12 +11,12 @@ angular.module('dgs').controller('UsersCtrl',function($scope,$state,userService,
 	});
 
 	roleService.query(function(data){
-		$scope.roles = data;
+		$scope.roles = data.roles;
 	});
 
 	$scope.pageChanged = function(page){
       	userService.query({page:page},function(data){
-      		$scope.users = data;
+      		$scope.users = data.users;
     	});
   	};
 

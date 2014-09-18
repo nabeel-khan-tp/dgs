@@ -12,7 +12,7 @@ angular.module('dgs').controller('LocationsCtrl',function($scope,$state,location
 
   $scope.pageChanged = function(page){
       locationService.query({page:page},function(data){
-      $scope.locations = data;
+      $scope.locations = data.locations;
     });
   }
 
