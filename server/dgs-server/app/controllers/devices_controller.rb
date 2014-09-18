@@ -7,7 +7,13 @@ class DevicesController < ApplicationController
   end
   
   def index
-    @devices = Device.all.order("id").page(params[:page]).per_page(5)
+    @page = params[:page]
+    if params[:per_page].present?  
+      @per_page = params[:per_page].to_i
+    else
+      @per_page = 5
+    end
+    @devices = Device.all.order("id").page(@page).per_page(@per_page)
     render json: @devices.to_json(:include => :location)
   end
 
