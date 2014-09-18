@@ -131,8 +131,11 @@ angular.module('dgs').run(function ($rootScope,$injector, AUTH_EVENTS, authServi
 
   $rootScope.$on('$stateChangeStart', function (event, next) {
     
-    if(typeof(next.isPublic)!=='undefined' && next.isPublic==true)
+    //console.log(next.url);
+
+    if(typeof(next.isPublic)!=='undefined' && next.isPublic===true){
       return;
+    }
 
     if (!authService.isAuthenticated()) {
       event.preventDefault();

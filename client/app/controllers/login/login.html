@@ -4,7 +4,13 @@
 	{{errorMessage}}
 </div>
 
-<form role="form"> <!-- ng-submit="login(credentials)"-->
+<div style="width:400px;margin:0 auto;">
+  <h4>Sign in</h4>
+</div>
+
+<form role="form" class="well" style="width:400px; margin:0 auto;"> <!-- ng-submit="login(
+credentials)"-->
+  
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
     <input type="email" class="form-control" ng-model="credentials.email" placeholder="Enter email" />
@@ -15,7 +21,7 @@
   </div>
  
   
-  <button type="submit" class="btn btn-danger" btn-process="login">Login</button>
+  <button type="submit" class="btn btn-block btn-danger" btn-process="login">Login</button>
 </form>
 
 </div>

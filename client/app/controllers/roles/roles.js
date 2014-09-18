@@ -1,13 +1,20 @@
-angular.module('dgs').controller('RolesCtrl',function($scope,$state,roleService,$http){
+angular.module('dgs').controller('RolesCtrl',function($scope,$state,roleService,permissionsService,$http){
 
 	$scope.showIndex = true;
 	$scope.currentRole = {name:""};
-	$scope.page = {current:1,total_items:20,items_per_page:2};
+	$scope.page = {current:1,total_items:0,items_per_page:10};
 	$scope.isEditing = false;
+	$scope.isRoleForm = false;
+	$scope.isPermissionsForm = false;
+	$scope.selectedPermissions = {};
 
 	roleService.query(function(data){
 		$scope.roles = data.roles;
 		$scope.page.total_items = data.count;
+	});
+
+	permissionsService.query(function(data){
+		$scope.permissions = data.permissions;
 	});
 
 	$scope.pageChanged = function(page){
@@ -18,6 +25,26 @@ angular.module('dgs').controller('RolesCtrl',function($scope,$state,roleService,
 
 	$scope.newRoleForm = function(){
 		$scope.showIndex = false;
+		$scope.isRoleForm = true;
+	};
+
+	$scope.showPermissionsFor = function(role){
+		$scope.showIndex = false;
+		$scope.isPermissionsForm = true;
+	};
+
+	$scope.savePermissions = function(selectedPermissions){
+		//console.log(selectedPermissions);
+		for(permission_id in selectedPermissions){
+			var currentPermission = 0;
+			//console.log("permission_id: "+permission_id);
+			for(permissionBit in selectedPermissions[permission_id]){
+				//console.log(ind);
+				currentPermission = currentPermission | permissionBit;
+			};
+
+			//console.log(currentPermission);
+		};
 	};
 
 	$scope.createRole = function(role){

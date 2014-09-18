@@ -39,7 +39,7 @@ angular.module('dgs').controller('UsersCtrl',function($scope,$state,userService,
 		$scope.users.push(user);
 	};
 	$scope.updateUser = function(user){
-		user.role_id=1;
+		//user.role_id=1;
 		userService.update({id:user.id},user);
 		$scope.showIndex = true;
 		$scope.isEditing = false;
