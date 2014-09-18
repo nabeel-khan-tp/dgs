@@ -14,7 +14,11 @@ class DevicesController < ApplicationController
       @per_page = 5
     end
     @devices = Device.all.order("id").page(@page).per_page(@per_page)
-    render json: @devices.to_json(:include => :location)
+    @devices_count = @devices.count
+    @devices_info = []
+    @devices_info.push(count: @devices_count)
+    @devices_info.push(devices: @devices)
+    render json: @devices_info.to_json(:include => :location)
   end
 
   def show
