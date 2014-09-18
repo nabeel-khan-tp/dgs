@@ -15,7 +15,7 @@ angular.module('dgs').controller('LoginCtrl',function($scope,$rootScope,$state,$
         
         console.log(res);
 
-        console.log(res.data.user.id + " "+ res.data.user.email);
+        console.log(res.data.user.id + " "+ res.data.user.email + " " + res.data.auth_key.access_token);
         $scope.setCurrentUser(res.data.user);
         $scope.setAuthToken(res.data.auth_key.access_token);
         $state.go("home");

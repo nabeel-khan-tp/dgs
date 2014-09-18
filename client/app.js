@@ -74,7 +74,8 @@ angular.module('dgs').controller('applicationController', function ($scope,$root
   };
 
   $scope.setAuthToken = function(token){
-    $scope.authToken = token;
+    $rootScope.authToken = token;
+    //$scope.authToken = token;
   };
 
   $scope.logout = function(){
