@@ -35,6 +35,9 @@ Rails.application.routes.draw do
   match 'session', to: 'session#options', via: [:options]
   post 'session' => 'session#create'
   
+  match 'roles_to_permissions', to: 'roles_to_permissions#options', via: [:options]
+  post 'roles_to_permissions' => 'roles_to_permissions#assign_rights'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
