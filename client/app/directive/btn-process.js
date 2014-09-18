@@ -5,7 +5,10 @@ angular.module('dgs').directive('btnProcess', function() {
 			element.on('click',function(event){
 				element.attr('disabled','disabled');
 				element.html('<span class="fa fa-cog fa-spin"></span>&nbsp;Processing please wait...');
-				//alert("button pressed");
+				
+				console.log(attrs.btnProcess);
+				eval("scope."+attrs.btnProcess+"();");
+				
 			});
 
 		}

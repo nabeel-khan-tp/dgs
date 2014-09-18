@@ -1,6 +1,6 @@
 <div class="col-md-12" ng-controller="RegisterCtrl">
 
-<form role="form" ng-submit="register(credentials)">
+<form role="form" ng-submit="register()">
   <div class="form-group">
     <label for="exampleInputEmail1">First Name</label>
     <input type="text" class="form-control" ng-model="credentials.first_name" placeholder="Enter name" />
@@ -23,7 +23,7 @@
       <input type="checkbox"> Always Remember Me
     </label>
   </div>
-  <button type="submit" class="btn btn-default">Register</button>
+  <button type="submit" class="btn btn-danger" btn-process="register">Register</button>
 </form>
 
 </div>
