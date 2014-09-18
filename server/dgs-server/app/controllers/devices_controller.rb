@@ -8,7 +8,7 @@ class DevicesController < ApplicationController
   
   def index
     @devices = Device.all.order("id").page(params[:page]).per_page(5)
-    render json: @devices.to_json
+    render json: @devices.to_json(:include => :location)
   end
 
   def show
