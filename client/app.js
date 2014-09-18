@@ -31,6 +31,11 @@ angular.module('dgs').config(function($stateProvider, $urlRouterProvider,$httpPr
         templateUrl: 'app/controllers/users/users.html'
     });
 
+    $stateProvider.state('home.roles', {
+        url: '/roles',
+        templateUrl: 'app/controllers/roles/roles.html'
+    });
+
     $stateProvider.state('home.locations', {
         url: '/locations',
         templateUrl: 'app/controllers/locations/locations.html'
@@ -50,6 +55,7 @@ angular.module('dgs').config(function($stateProvider, $urlRouterProvider,$httpPr
         url: '/devices',
         templateUrl: 'app/controllers/devices/devices.html'
     });
+    
     /* Add New States Above */
     $urlRouterProvider.otherwise('/home');
 

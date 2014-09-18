@@ -31,8 +31,9 @@
           </tr>
         </table>
         <div style="padding:10px; padding-top:0px">
-          <pagination page="page.current" total-items="page.total_items" items-per-page="page.items_per_page"></pagination>
+          <pagination ng-model="page.current" page="page.current" total-items="page.total_items" on-select-page="pageChanged(page)" items-per-page="page.items_per_page"></pagination>
           
+
         </div>
       </div>
       <div style="padding:10px" ng-hide="showIndex">

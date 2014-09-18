@@ -12,7 +12,7 @@ angular.module('dgs').controller('DevicesCtrl',function($scope,$state,deviceServ
 
   locationService.query(function(data){
     $scope.locations = data;
-    $scope.page.total_items = $scope.locations.length;
+    //$scope.page.total_items = $scope.locations.length;
   });
 
   $scope.newDeviceForm = function(){

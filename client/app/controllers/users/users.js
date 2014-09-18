@@ -1,4 +1,4 @@
-angular.module('dgs').controller('UsersCtrl',function($scope,$state,userService,$http){
+angular.module('dgs').controller('UsersCtrl',function($scope,$state,userService,roleService,$http){
 
 	$scope.showIndex = true;
 	$scope.currentUser = {first_name:"",last_name:"",email:"",password:""};
@@ -9,6 +9,16 @@ angular.module('dgs').controller('UsersCtrl',function($scope,$state,userService,
 		$scope.users = data;
 		$scope.page.total_items = $scope.users.length;
 	});
+
+	roleService.query(function(data){
+		$scope.roles = data;
+	});
+
+	$scope.pageChanged = function(page){
+      	userService.query({page:page},function(data){
+      		$scope.users = data;
+    	});
+  	};
 
 	$scope.newUserForm = function(){
 		$scope.showIndex = false;

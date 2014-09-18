@@ -5,10 +5,16 @@ angular.module('dgs').controller('LocationsCtrl',function($scope,$state,location
   $scope.page = {current:1,total_items:20,items_per_page:2};
   $scope.isEditing = false;
 
-  locationService.query(function(data){
+  locationService.query({page:$scope.page.current},function(data){
     $scope.locations = data;
     $scope.page.total_items = $scope.locations.length;
   });
+
+  $scope.pageChanged = function(page){
+      locationService.query({page:page},function(data){
+      $scope.locations = data;
+    });
+  }
 
   $scope.newLocationForm = function(){
     $scope.showIndex = false;
