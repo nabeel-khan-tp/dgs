@@ -7,8 +7,18 @@ class LocationsController < ApplicationController
   end
   
   def index
-    @locations = Location.all.order("id").page(params[:page]).per_page(5)
-    render json: @locations.to_json
+    @page = params[:page]
+    if params[:per_page].present?  
+      @per_page = params[:per_page].to_i
+    else
+      @per_page = 5
+    end
+    @locations = Location.all.order("id").page(@page).per_page(@per_page)
+    @locations_count = @locations.count
+    @locations_info = {}
+    @locations_info.merge!(count: @locations_count)
+    @locations_info.merge!(locations: @locations)
+    render json: @locations_info.to_json
   end
 
   def show

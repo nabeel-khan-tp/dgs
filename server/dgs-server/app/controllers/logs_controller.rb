@@ -7,8 +7,18 @@ class LogsController < ApplicationController
   end
   
   def index
-    @logs = Log.all.order("id").page(params[:page]).per_page(5)
-    render json: @logs.to_json
+    @page = params[:page]
+    if params[:per_page].present?  
+      @per_page = params[:per_page].to_i
+    else
+      @per_page = 5
+    end
+    @logs = Log.all.order("id").page(@page).per_page(@per_page)
+    @logs_count = @logs.count
+    @logs_info = {}
+    @logs_info.merge!(count: @logs_count)
+    @logs_info.merge!(logs: @logs)
+    render json: @logs_info.to_json
   end
 
   def show

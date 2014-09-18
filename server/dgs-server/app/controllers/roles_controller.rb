@@ -7,8 +7,18 @@ class RolesController < ApplicationController
   end
   
   def index
-    @roles = Role.all
-    render json: @roles.to_json
+    @page = params[:page]
+    if params[:per_page].present?  
+      @per_page = params[:per_page].to_i
+    else
+      @per_page = 5
+    end
+    @roles = Role.all.order("id").page(@page).per_page(@per_page)
+    @roles_count = @roles.count
+    @roles_info = {}
+    @roles_info.merge!(count: @roles_count)
+    @roles_info.merge!(roles: @roles)
+    render json: @roles_info.to_json
   end
 
   def show

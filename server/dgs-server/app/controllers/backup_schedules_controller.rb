@@ -7,8 +7,18 @@ class BackupSchedulesController < ApplicationController
   end
   
   def index
-    @backup_schedules = BackupSchedule.all
-    render json: @backup_schedules.to_json
+    @page = params[:page]
+    if params[:per_page].present?  
+      @per_page = params[:per_page].to_i
+    else
+      @per_page = 5
+    end
+    @backup_schedules = BackupSchedule.all.order("id").page(@page).per_page(@per_page)
+    @backup_schedules_count = @backup_schedules.count
+    @backup_schedules_info = {}
+    @backup_schedules_info.merge!(count: @backup_schedules_count)
+    @backup_schedules_info.merge!(backup_schedules: @backup_schedules)
+    render json: @backup_schedules_info.to_json
   end
 
   def show

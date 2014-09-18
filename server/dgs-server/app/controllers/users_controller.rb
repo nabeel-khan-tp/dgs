@@ -9,8 +9,18 @@ class UsersController < ApplicationController
   
    # in home_controller.rb
   def index
-    @users = User.all.order("id").page(params[:page]).per_page(5)
-    render json: @users.to_json
+    @page = params[:page]
+    if params[:per_page].present?  
+      @per_page = params[:per_page].to_i
+    else
+      @per_page = 5
+    end
+    @users = User.all.order("id").page(@page).per_page(@per_page)
+    @users_count = @users.count
+    @users_info = {}
+    @users_info.merge!(count: @users_count)
+    @users_info.merge!(users: @users)
+    render json: @users_info.to_json
   end
 
   def show

@@ -7,8 +7,18 @@ class PermissionsController < ApplicationController
   end
   
   def index
-    @permissions = Permission.all
-    render json: @permissions.to_json
+    @page = params[:page]
+    if params[:per_page].present?  
+      @per_page = params[:per_page].to_i
+    else
+      @per_page = 5
+    end
+    @permissions = Permission.all.order("id").page(@page).per_page(@per_page)
+    @permissions_count = @permissions.count
+    @permissions_info = {}
+    @permissions_info.merge!(count: @permissions_count)
+    @permissions_info.merge!(permissions: @permissions)
+    render json: @permissions_info.to_json
   end
 
   def show
