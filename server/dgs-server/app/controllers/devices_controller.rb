@@ -15,9 +15,9 @@ class DevicesController < ApplicationController
     end
     @devices = Device.all.order("id").page(@page).per_page(@per_page)
     @devices_count = @devices.count
-    @devices_info = []
-    @devices_info.push(count: @devices_count)
-    @devices_info.push(devices: @devices)
+    @devices_info = {}
+    @devices_info.merge!(count: @devices_count)
+    @devices_info.merge!(devices: @devices)
     render json: @devices_info.to_json(:include => :location)
   end
 
