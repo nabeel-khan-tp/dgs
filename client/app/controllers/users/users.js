@@ -57,4 +57,7 @@ angular.module('dgs').controller('UsersCtrl',function($scope,$state,userService,
 		$scope.newuser = {first_name:"",last_name:"",email:"",password:""};
 	};
 
+	$scope.submitForm = function() {
+	};
+
 });
