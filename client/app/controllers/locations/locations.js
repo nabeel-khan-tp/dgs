@@ -52,4 +52,7 @@ angular.module('dgs').controller('LocationsCtrl',function($scope,$state,location
     $scope.newlocation = {name:"",lat:"",lng:""};
   };
 
+  $scope.submitForm = function() {
+  };
+  
 });
