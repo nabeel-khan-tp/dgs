@@ -60,6 +60,14 @@
 					<input type="password" class="form-control" ng-model="currentUser.password" placeholder="Password">
 					</div> -->
 					
+					<div class="form-group" ng-class="{ 'has-error' : userForm.role_id.$invalid && !userForm.role_id.$pristine }">
+            <label>Role</label>
+            <select ng-model="currentUser.role_id" class='form-control' name="role_id" required>
+            	<option value="">Select Role</option> 
+							<option ng-repeat="role in roles" value="{{role.id}}">{{role.name}}</option>
+						</select>
+            <p ng-show="userForm.role_id.$invalid && !userForm.role_id.$pristine" class="help-block">You must select a role.</p>
+	        </div>
 					<div class="form-group" ng-class="{ 'has-error' : userForm.first_name.$invalid && !userForm.first_name.$pristine }">
             <label>First Name</label>
             <input type="text" name="first_name" class="form-control" ng-model="currentUser.first_name" required>
