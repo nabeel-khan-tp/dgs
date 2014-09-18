@@ -4,7 +4,7 @@
 	{{errorMessage}}
 </div>
 
-<form role="form" ng-submit="login(credentials)">
+<form role="form"> <!-- ng-submit="login(credentials)"-->
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
     <input type="email" class="form-control" ng-model="credentials.email" placeholder="Enter email" />
@@ -15,7 +15,7 @@
   </div>
  
   
-  <button type="submit" class="btn btn-danger" btn-process-s="">Login</button>
+  <button type="submit" class="btn btn-danger" btn-process="login">Login</button>
 </form>
 
 </div>

@@ -4,9 +4,9 @@ angular.module('dgs').controller('LoginCtrl',function($scope,$rootScope,$state,$
   $scope.errorOnLogin = false;
   $scope.errorMessage = "";
 
-  $scope.login = function(credentials){
+  $scope.login = function(){
   
-    authService.login(credentials).then(function(res){
+    authService.login($scope.credentials).then(function(res){
       
       //console.log(res);
       if(res.status===200)
