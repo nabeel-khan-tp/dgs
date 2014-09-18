@@ -18,12 +18,12 @@ class RolesController < ApplicationController
     @roles_info = {}
     @roles_info.merge!(count: @roles_count)
     @roles_info.merge!(roles: @roles)
-    render json: @roles_info.to_json(:include => :permissions)
+    render json: @roles_info.to_json(:include => {:roles_to_permissions => {:include => {:permission =>{:only => [:id, :name]}},:except => :permission_id}})
   end
 
   def show
     @role = Role.find(params[:id])
-    render json: @role.to_json(:include => :permissions)
+    render json: @role.to_json(:include => {:roles_to_permissions => {:include => {:permission =>{:only => [:id, :name]}},:except => :permission_id}})
   end
 
   def create
