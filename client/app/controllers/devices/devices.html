@@ -42,36 +42,42 @@
         </div>
       </div>
       <div style="padding:10px" ng-hide="showIndex">
-        <form role="form">
-          <div class="form-group">
-          <label for="exampleInputEmail1">Name</label>
-          <input type="text" class="form-control" ng-model="currentDevice.device_name" placeholder="Enter Name">
+        <form name="deviceForm" ng-submit="submitForm()" role="form" novalidate>
+          <div class="form-group" ng-class="{ 'has-error' : deviceForm.device_name.$invalid && !deviceForm.device_name.$pristine }">
+              <label>Name</label>
+              <input type="text" name="device_name" class="form-control" ng-model="currentDevice.device_name" required>
+              <p ng-show="deviceForm.device_name.$invalid && !deviceForm.device_name.$pristine" class="help-block">Name is required.</p>
           </div>
-          <div class="form-group">
-          <label for="exampleInputEmail1">Location</label>
-          <select ng-model="currentDevice.location_id">
-          <option ng-repeat="location in locations" value="{{location.id}}">{{location.name}}</option>
-          </select>
+          <div class="form-group" ng-class="{ 'has-error' : deviceForm.location_id.$invalid && !deviceForm.location_id.$pristine }">
+            <label>Location</label>
+            <select ng-model="currentDevice.location_id" class='form-control' name="location_id" required>
+              <option value="">Select Location</option> 
+              <option ng-repeat="location in locations" value="{{location.id}}">{{location.name}}</option>
+            </select>
+            <p ng-show="deviceForm.location_id.$invalid && !deviceForm.location_id.$pristine" class="help-block">You must select a location.</p>
           </div>
-          <div class="form-group">
-          <label for="exampleInputEmail1">Space Available</label>
-          <input type="text" class="form-control" ng-model="currentDevice.space_available" placeholder="Enter Space Available">
-          </div> 
-          <div class="form-group">
-          <label for="exampleInputEmail1">Total Space Allocated</label>
-          <input type="text" class="form-control" ng-model="currentDevice.total_space_allocated" placeholder="Enter Total Space Allocated">
-          </div>  
-          <div class="form-group">
-          <label for="exampleInputEmail1">Status</label>
-          <input type="text" class="form-control" ng-model="currentDevice.status" placeholder="Enter Status">
+          <div class="form-group" ng-class="{ 'has-error' : deviceForm.space_available.$invalid && !deviceForm.space_available.$pristine }">
+            <label>Space Available</label>
+            <input type="text" name="space_available" class="form-control" ng-model="currentDevice.space_available" required ng-pattern="/^-?\d+\.?\d*$/">
+            <p ng-show="deviceForm.space_available.$invalid && !deviceForm.space_available.$pristine" class="help-block">Space Available not valid.(Please enter numeric value)</p>
+          </div>
+          <div class="form-group" ng-class="{ 'has-error' : deviceForm.total_space_allocated.$invalid && !deviceForm.total_space_allocated.$pristine }">
+            <label>Total Space Allocated</label>
+            <input type="text" name="total_space_allocated" class="form-control" ng-model="currentDevice.total_space_allocated" required ng-pattern="/^-?\d+\.?\d*$/">
+            <p ng-show="deviceForm.total_space_allocated.$invalid && !deviceForm.total_space_allocated.$pristine" class="help-block">Total Space Allocated not valid.(Please enter numeric value)</p>
+          </div>
+          <div class="form-group" ng-class="{ 'has-error' : deviceForm.status.$invalid && !deviceForm.status.$pristine }">
+            <label>Status</label>
+            <input type="text" name="status" class="form-control" ng-model="currentDevice.status" required ng-pattern="/^\d+$/">
+            <p ng-show="deviceForm.status.$invalid && !deviceForm.status.$pristine" class="help-block">Status not valid.(Please enter numeric value)</p>
           </div>  
           <!-- <div class="form-group">
           <label for="exampleInputEmail1">Uptime</label>
           <input type="text" class="form-control" ng-model="currentDevice.uptime" placeholder="Enter Uptime">
           </div>   -->        
           
-          <button ng-show="!isEditing" type="submit" class="btn btn-primary" ng-click="createDevice(currentDevice)">Create</button>
-          <button ng-show="isEditing" type="submit" class="btn btn-primary" ng-click="updateDevice(currentDevice)">Update</button>
+          <button ng-show="!isEditing" type="submit" class="btn btn-primary" ng-click="createDevice(currentDevice)" ng-disabled="deviceForm.$invalid">Create</button>
+          <button ng-show="isEditing" type="submit" class="btn btn-primary" ng-click="updateDevice(currentDevice)" ng-disabled="deviceForm.$invalid">Update</button>
           
           <button type="submit" class="btn btn-default" ng-click="cancelDeviceForm()">Cancel</button>
         </form>

@@ -60,4 +60,7 @@ angular.module('dgs').controller('DevicesCtrl',function($scope,$state,deviceServ
     $scope.newdevice = {user_id:"",location_id:"",device_name:"",space_available:"",total_space_allocated:"",status:"",uptime:""};
   };
 
+  $scope.submitForm = function() {
+  };
+  
 });
