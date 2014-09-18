@@ -26,16 +26,19 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @role = @user.role
-    @permissions = @role.permissions
-
-    @role_info ={}
-    @permissions_info = []
-    @permissions.each do |p|
-      @permissions_info.push(id: p.id, name: p.name)
+    if @role.present?
+      @role_info ={}
+      @permissions = @role.permissions
+      @permissions_info = []
+      @permissions.each do |p|
+        @permissions_info.push(id: p.id, name: p.name)
+      end
+      @role_info.merge!(id: @role.id, name: @role.name, permissions: @permissions_info)
+      @user_info = {id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, role: @role_info}
+    else
+      @user_info = {id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, role: @role_info}
     end
-    @role_info.merge!(id: @role.id, name: @role.name, permissions: @permissions_info)
-    @user_info = {id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, role: @role_info}
-    render json: @user_info.to_json
+     render json: @user_info.to_json
   end
 
   def create
