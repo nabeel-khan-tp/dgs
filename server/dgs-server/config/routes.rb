@@ -31,12 +31,13 @@ Rails.application.routes.draw do
   match 'locations/:id', to: 'locations#options', via: [:options]
   resources :locations
 
-
   match 'session', to: 'session#options', via: [:options]
   post 'session' => 'session#create'
   
   match 'roles_to_permissions', to: 'roles_to_permissions#options', via: [:options]
   post 'roles_to_permissions' => 'roles_to_permissions#assign_rights'
+  delete 'roles_to_permissions' => 'roles_to_permissions#destroy_all'
+  resources :roles_to_permissions
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

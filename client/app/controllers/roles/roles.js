@@ -1,4 +1,4 @@
-angular.module('dgs').controller('RolesCtrl',function($scope,$state,roleService,permissionsService,$http){
+angular.module('dgs').controller('RolesCtrl',function($scope,$state,roleService,permissionsService,roleToPermService,$http){
 
 	$scope.showIndex = true;
 	$scope.currentRole = {name:""};
@@ -6,7 +6,8 @@ angular.module('dgs').controller('RolesCtrl',function($scope,$state,roleService,
 	$scope.isEditing = false;
 	$scope.isRoleForm = false;
 	$scope.isPermissionsForm = false;
-	$scope.selectedPermissions = {};
+	$scope.selectedPermissions = [];
+	$scope.currentSelectedRoleId = 0;
 
 	roleService.query(function(data){
 		$scope.roles = data.roles;
@@ -31,20 +32,47 @@ angular.module('dgs').controller('RolesCtrl',function($scope,$state,roleService,
 	$scope.showPermissionsFor = function(role){
 		$scope.showIndex = false;
 		$scope.isPermissionsForm = true;
+		$scope.currentSelectedRoleId = role.id;
+	
+		$scope.selectedPermissions[1] = {};
+		$scope.selectedPermissions[1][1] = true;
+		$scope.selectedPermissions[1][2] = true;
+
+	};
+
+	$scope.goBack = function(){
+		$scope.currentSelectedRoleId = 0;
+		$scope.isPermissionsForm = false;
+		$scope.showIndex = true;
+		$scope.selectedPermissions = {};
 	};
 
 	$scope.savePermissions = function(selectedPermissions){
 		//console.log(selectedPermissions);
-		for(permission_id in selectedPermissions){
-			var currentPermission = 0;
-			//console.log("permission_id: "+permission_id);
-			for(permissionBit in selectedPermissions[permission_id]){
-				//console.log(ind);
-				currentPermission = currentPermission | permissionBit;
-			};
+		roleToPermService.delete({role_id:$scope.currentSelectedRoleId},
+			function(res){
+				//console.log("deleted record");
+				//console.log(res);
+			
+				for(permission_id in selectedPermissions){
+					var rights = 0;
+					//console.log("permission_id: "+permission_id);
+					for(permissionBit in selectedPermissions[permission_id]){
+						//console.log(ind);
+						rights = rights | permissionBit;
+					};
 
-			//console.log(currentPermission);
-		};
+					
+					roleToPermService.save({role_id:$scope.currentSelectedRoleId,
+												permission_id:permission_id,
+												rights:rights},function(res){
+													//console.log(res);
+													//console.log("saving rtop");
+												});
+					//roleToPermService.save();
+					//console.log(currentPermission);
+				};
+			});
 	};
 
 	$scope.createRole = function(role){
