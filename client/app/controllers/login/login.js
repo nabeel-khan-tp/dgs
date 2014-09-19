@@ -7,7 +7,8 @@ angular.module('dgs').controller('LoginCtrl',function($scope,$rootScope,$state,$
   $scope.login = function(){
   
     authService.login($scope.credentials).then(function(res){
-      
+      //var deferred = $q.defer();
+      //deferred.resolve(res);
       //console.log(res);
       if(res.status===200)
       {
@@ -24,6 +25,8 @@ angular.module('dgs').controller('LoginCtrl',function($scope,$rootScope,$state,$
         $scope.errorOnLogin = true;
         $scope.errorMessage = "Sorry either email does not exists or wrong password"; //res.data.message;
       }
+
+      //return deferred.promise;
   	},
   	function(){
   		$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
