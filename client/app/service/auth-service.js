@@ -3,17 +3,21 @@ angular.module('dgs').factory('authService',function($http,session) {
 	var authService = {};
 
 	//authService.API_URL = 'http://localhost:8080/api';
-	authService.API_URL = 'http://localhost:3000';
-	//authService.API_URL = 'http://safe-reef-1442.herokuapp.com';
+	//authService.API_URL = 'http://localhost:3000';
+	authService.API_URL = 'http://safe-reef-1442.herokuapp.com';
 
 	authService.login = function(credentials){
 		return $http
 				.post(authService.API_URL+'/session',credentials)
 				.then(function(res){
 					
-					console.log(res);
+					//console.log("login status: "+res.status);
+					//console.log(res);
 
 					session.create(res.data.user.id,res.data.user,res.data.auth_key.access_token);
+					return res;
+				},function(res){
+					//console.log("*login status: "+res.status);
 					return res;
 				});
 	};

@@ -10,6 +10,8 @@ angular.module('dgs').controller('LoginCtrl',function($scope,$rootScope,$state,$
       //var deferred = $q.defer();
       //deferred.resolve(res);
       //console.log(res);
+      //console.log("login status: "+res.status);
+
       if(res.status===200)
       {
         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);

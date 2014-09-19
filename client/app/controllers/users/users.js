@@ -1,9 +1,10 @@
-angular.module('dgs').controller('UsersCtrl',function($scope,$state,userService,roleService,$http){
+angular.module('dgs').controller('UsersCtrl',function($scope,$state,authService,userService,roleService,$http){
 
 	$scope.showIndex = true;
 	$scope.currentUser = {first_name:"",last_name:"",email:"",password:""};
 	$scope.page = {current:1,total_items:0,items_per_page:10};
 	$scope.isEditing = false;
+	$scope.perm = authService;
 
 	userService.query(function(data){
 		$scope.users = data.users;
@@ -15,7 +16,7 @@ angular.module('dgs').controller('UsersCtrl',function($scope,$state,userService,
 	});
 
 	$scope.pageChanged = function(page){
-      	userService.query({page:page},function(data){
+      	userService.query({page:page,per_page:$scope.page.items_per_page},function(data){
       		$scope.users = data.users;
     	});
   	};

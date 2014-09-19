@@ -56,6 +56,11 @@ angular.module('dgs').config(function($stateProvider, $urlRouterProvider,$httpPr
         templateUrl: 'app/controllers/devices/devices.html'
     });
     
+    $stateProvider.state('noperm', {
+        url: '/noperm',
+        templateUrl: 'app/controllers/no-permission/no-permission.html',
+        isPublic:true
+    });
     /* Add New States Above */
     $urlRouterProvider.otherwise('/home');
 
@@ -117,7 +122,7 @@ angular.module('dgs').run(function($rootScope) {
 
 });
 
-angular.module('dgs').run(function ($rootScope,$injector, AUTH_EVENTS, authService,$state,USER_ROLES) {
+angular.module('dgs').run(function ($modal,$rootScope,$injector, AUTH_EVENTS, authService,$state,USER_ROLES) {
   
   $injector.get("$http").defaults.transformRequest = function(data, headersGetter) {
         //console.log("sending token with http" + $rootScope.authToken);
@@ -134,7 +139,7 @@ angular.module('dgs').run(function ($rootScope,$injector, AUTH_EVENTS, authServi
 
   $rootScope.$on('$stateChangeStart', function (event, next) {
     
-    //console.log(next);
+    console.log(next);
     //console.log(next.url);
 
     if(typeof(next.isPublic)!=='undefined' && next.isPublic===true){
@@ -151,11 +156,13 @@ angular.module('dgs').run(function ($rootScope,$injector, AUTH_EVENTS, authServi
     {
       //User is authenticated but now lets check if he has proper rights to
       // visit this url
-      if(!authService.hasPermissions(next.name))
+      if(!authService.hasPermissions(next.name) && next.name!='home')
       {
+        event.preventDefault();
         $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
         console.log("User not authorized to view "+next.name);
-        //$state.go("home");
+        $modal.open({templateUrl:'app/controllers/no-permission/no-permission.html'});
+        //$state.go("noperm");
       }
     }
 

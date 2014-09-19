@@ -2,7 +2,7 @@ angular.module('dgs').controller('LocationsCtrl',function($scope,$state,location
 
   $scope.showIndex = true;
   $scope.currentLocation = {name:"",lat:"",lng:""};
-  $scope.page = {current:1,total_items:20,items_per_page:10};
+  $scope.page = {current:1,total_items:0,items_per_page:20};
   $scope.isEditing = false;
 
   locationService.query({page:$scope.page.current},function(data){
@@ -11,7 +11,7 @@ angular.module('dgs').controller('LocationsCtrl',function($scope,$state,location
   });
 
   $scope.pageChanged = function(page){
-      locationService.query({page:page},function(data){
+      locationService.query({page:page,per_page:$scope.page.items_per_page},function(data){
       $scope.locations = data.locations;
     });
   }

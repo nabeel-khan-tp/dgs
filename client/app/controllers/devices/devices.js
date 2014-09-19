@@ -18,7 +18,7 @@ angular.module('dgs').controller('DevicesCtrl',function($scope,$state,deviceServ
     });
   }
 
-  locationService.query(function(data){
+  locationService.query({per_page:100},function(data){
     $scope.locations = data.locations;
     //$scope.page.total_items = $scope.locations.length;
   });

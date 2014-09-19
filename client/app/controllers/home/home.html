@@ -8,10 +8,10 @@
 		  </div>
 		  <div class="panel-body">
 		    <ul class="nav nav-pills nav-stacked">
-		    	<li><a ui-sref="home.users"><span class="fa fa-user"></span> Users</a></li>
-		    	<li><a ui-sref="home.locations"><span class="fa fa-location-arrow"></span> Locations</a></li>
-		    	<li><a ui-sref="home.devices"><span class="fa fa-cogs"></span> Devices</a></li>
-		    	<li><a ui-sref="home.roles"><span class="fa fa-lock"></span> Roles &amp; Permissions</a></li>
+		    	<li ng-show="p.hasPermissions('home.users')"><a ui-sref="home.users"><span class="fa fa-user"></span> Users</a></li>
+		    	<li ng-show="p.hasPermissions('home.locations')"><a ui-sref="home.locations"><span class="fa fa-location-arrow"></span> Locations</a></li>
+		    	<li ng-show="p.hasPermissions('home.devices')"><a ui-sref="home.devices"><span class="fa fa-cogs"></span> Devices</a></li>
+		    	<li ng-show="p.hasPermissions('home.roles')"><a ui-sref="home.roles"><span class="fa fa-lock"></span> Roles &amp; Permissions</a></li>
 
 			</ul>
 		  </div>

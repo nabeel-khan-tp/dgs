@@ -11,7 +11,7 @@ class DevicesController < ApplicationController
     if params[:per_page].present?  
       @per_page = params[:per_page].to_i
     else
-      @per_page = 5
+      @per_page = 20
     end
     @devices = Device.all.order("id").page(@page).per_page(@per_page)
     @devices_count = @devices.count
