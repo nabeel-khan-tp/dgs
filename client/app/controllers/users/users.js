@@ -1,4 +1,4 @@
-angular.module('dgs').controller('UsersCtrl',function($scope,$state,authService,userService,roleService,$http){
+angular.module('dgs').controller('UsersCtrl',function($q,$scope,$state,authService,userService,roleService,$http){
 
 	$scope.showIndex = true;
 	$scope.currentUser = {first_name:"",last_name:"",email:"",password:""};
@@ -29,17 +29,25 @@ angular.module('dgs').controller('UsersCtrl',function($scope,$state,authService,
 
 	$scope.createUser = function(user){
 		//console.log(user);
-		$scope.showIndex = true;
-		$scope.isEditing = false;
+		var deferred = $q.defer();
+		
 		userService.save(user,function(res){
-			console.log("success");
-			console.log(res);
+			//console.log("success");
+			//console.log(res);
+			$scope.showIndex = true;
+			$scope.isEditing = false;
+			
+			deferred.resolve("ok");
 		},function(res){
-			console.log("error");
-			console.log(res);
+			//console.log("error");
+			//console.log(res);
+			deferred.reject("rejected");
 		});
 		$scope.users.push(user);
+
+		return deferred.promise;
 	};
+
 	$scope.updateUser = function(user){
 		//user.role_id=1;
 		userService.update({id:user.id},user);

@@ -1,17 +1,12 @@
-angular.module('dgs').controller('LoginCtrl',function($scope,$rootScope,$state,$http,AUTH_EVENTS,authService){
+angular.module('dgs').controller('LoginCtrl',function($q,$scope,$rootScope,$state,$http,AUTH_EVENTS,authService){
 
   $scope.credentials = {email: '',password: ''};
   $scope.errorOnLogin = false;
   $scope.errorMessage = "";
 
   $scope.login = function(){
-  
+    var deferred = $q.defer();
     authService.login($scope.credentials).then(function(res){
-      //var deferred = $q.defer();
-      //deferred.resolve(res);
-      //console.log(res);
-      //console.log("login status: "+res.status);
-
       if(res.status===200)
       {
         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
@@ -28,12 +23,24 @@ angular.module('dgs').controller('LoginCtrl',function($scope,$rootScope,$state,$
         $scope.errorMessage = "Sorry either email does not exists or wrong password"; //res.data.message;
       }
 
+      deferred.resolve('ok');
       //return deferred.promise;
   	},
   	function(){
   		$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+      deferred.reject('sorry');
   	});
+
+    return deferred.promise;
 	
   };
+
+/*  $scope.login().then(function(res){
+    console.log(res);
+    console.log("login success");
+  },function(res){
+    console.log(res);
+    console.log("login failed");
+  });*/
 
 });

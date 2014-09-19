@@ -2,6 +2,9 @@ angular.module('dgs').directive('btnProcess', function($parse,$timeout) {
 	return {
 		restrict: 'A',
 		link: function(scope, element, attrs, fn) {
+			//lass="btn btn-block btn-danger"
+			element.addClass("btn btn-block btn-danger");
+
 			element.on('click',function(event){
 				element.attr('disabled','disabled');
 				var currentHTML = element.html();
@@ -12,7 +15,19 @@ angular.module('dgs').directive('btnProcess', function($parse,$timeout) {
 				console.log(attrs.btnProcess);
 				var fna = $parse(attrs.btnProcess);
 				
-				$timeout(
+				fna(scope).then(function(res){
+					console.log(res);
+					element.removeAttr('disabled');
+					element.html(currentHTML);
+				},function(res){
+					console.log(res);
+					element.removeAttr('disabled');
+					element.html(currentHTML);
+				});
+
+			//fna(scope);
+
+				/*$timeout(
                     function() {
 							fna(scope);
                         //console.log( "$timeout 1" );
@@ -20,7 +35,7 @@ angular.module('dgs').directive('btnProcess', function($parse,$timeout) {
 						element.html(currentHTML);
                     }
                 ,1000);
-
+				*/
 
 				/*.then(function(){
 					element.$set('disabled', false);
