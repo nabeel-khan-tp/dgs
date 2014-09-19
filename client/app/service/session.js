@@ -35,13 +35,13 @@ angular.module('dgs').factory('session',function($cookieStore) {
 			//this.userRole = $cookieStore.get("userRole");
 			if(typeof($cookieStore.get("token"))!=='undefined')
 			{
-				console.log("found token thus setting: "+$cookieStore.get("token"));
+				//console.log("found token thus setting: "+$cookieStore.get("token"));
 				this.token = $cookieStore.get("token");
 			}
 
 			if(this.userId)
 			{
-				console.log("Reading user_id from cookies and found it");
+				//console.log("Reading user_id from cookies and found it");
 				return true;
 			}
 			else{
@@ -53,8 +53,8 @@ angular.module('dgs').factory('session',function($cookieStore) {
 
 	session.currentUser = function(){
 		if(this.hasUserId()){
-			console.log("Setting current user to ");
-			console.log(this.user);
+			//console.log("Setting current user to ");
+			//console.log(this.user);
 			return this.user;
 		}
 		else{

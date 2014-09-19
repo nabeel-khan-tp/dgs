@@ -83,8 +83,8 @@ angular.module('dgs').controller('applicationController', function ($scope,$root
   $scope.setCurrentUser = function (user) {
     $scope.currentUser = user;
 
-    console.log("Setting current User in system to");
-    console.log(user);
+    //console.log("Setting current User in system to");
+    //console.log(user);
   };
 
   $scope.setAuthToken = function(token){

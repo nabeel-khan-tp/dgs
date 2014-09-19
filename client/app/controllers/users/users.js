@@ -4,7 +4,8 @@ angular.module('dgs').controller('UsersCtrl',function($scope,$state,authService,
 	$scope.currentUser = {first_name:"",last_name:"",email:"",password:""};
 	$scope.page = {current:1,total_items:0,items_per_page:10};
 	$scope.isEditing = false;
-	$scope.perm = authService;
+	$scope.perm = authService.hasPermissions;
+	$scope.hasEditingPermission = authService.hasPermissions('home.users',2);
 
 	userService.query(function(data){
 		$scope.users = data.users;
@@ -44,6 +45,17 @@ angular.module('dgs').controller('UsersCtrl',function($scope,$state,authService,
 		userService.update({id:user.id},user);
 		$scope.showIndex = true;
 		$scope.isEditing = false;
+	};
+	$scope.remove = function(user){
+		userService.delete(user);
+	//_.remove($scope.users,user);
+		for(x in $scope.users)
+		{
+			if($scope.users[x].id==user.id)
+			{
+					delete($scope.users[x]);
+			}
+		}
 	};
 
 	$scope.editUserForm = function(user){

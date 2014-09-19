@@ -3,8 +3,8 @@ angular.module('dgs').factory('authService',function($http,session) {
 	var authService = {};
 
 	//authService.API_URL = 'http://localhost:8080/api';
-	//authService.API_URL = 'http://localhost:3000';
-	authService.API_URL = 'http://safe-reef-1442.herokuapp.com';
+	authService.API_URL = 'http://localhost:3000';
+	//authService.API_URL = 'http://safe-reef-1442.herokuapp.com';
 
 	authService.login = function(credentials){
 		return $http
@@ -63,14 +63,22 @@ angular.module('dgs').factory('authService',function($http,session) {
 	authService.hasPermissions = function(permission_name,rights){
 		permission_name = typeof permission_name !== 'undefined'?permission_name:'';
 		rights = typeof rights !== 'undefined'? rights:1;
+		rights = parseInt(rights);
+
 		var currentUser = session.currentUser();
 		if(currentUser)
 		{
 			for(x in currentUser.role.permissions){
 				if(currentUser.role.permissions[x].name==permission_name)
 				{
+					console.log("found permissions for "+permission_name+" against "+currentUser.role.permissions[x].name+" - with_rights:"+rights);
+					if((currentUser.role.permissions[x].rights & rights) == rights){
+						return true;
+					}else{
+						return false;
+					}
 					//rights checking here
-					return true;
+					//return true;
 				}
 			}
 		}
