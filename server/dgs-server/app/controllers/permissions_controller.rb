@@ -11,7 +11,7 @@ class PermissionsController < ApplicationController
     if params[:per_page].present?  
       @per_page = params[:per_page].to_i
     else
-      @per_page = 5
+      @per_page = 20
     end
     @permissions = Permission.all.order("id").page(@page).per_page(@per_page)
     @permissions_count = @permissions.count

@@ -53,6 +53,8 @@ angular.module('dgs').factory('session',function($cookieStore) {
 
 	session.currentUser = function(){
 		if(this.hasUserId()){
+			console.log("Setting current user to ");
+			console.log(this.user);
 			return this.user;
 		}
 		else{

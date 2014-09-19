@@ -7,7 +7,7 @@ angular.module('dgs').directive('btnProcess', function() {
 				element.html('<span class="fa fa-cog fa-spin"></span>&nbsp;Processing please wait...');
 				
 				console.log(attrs.btnProcess);
-				eval("scope."+attrs.btnProcess+"();");
+				eval("scope."+attrs.btnProcess+";");
 				
 			});
 

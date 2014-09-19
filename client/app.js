@@ -77,6 +77,9 @@ angular.module('dgs').controller('applicationController', function ($scope,$root
 
   $scope.setCurrentUser = function (user) {
     $scope.currentUser = user;
+
+    console.log("Setting current User in system to");
+    console.log(user);
   };
 
   $scope.setAuthToken = function(token){
@@ -117,11 +120,11 @@ angular.module('dgs').run(function($rootScope) {
 angular.module('dgs').run(function ($rootScope,$injector, AUTH_EVENTS, authService,$state,USER_ROLES) {
   
   $injector.get("$http").defaults.transformRequest = function(data, headersGetter) {
-        console.log("sending token with http" + $rootScope.authToken);
+        //console.log("sending token with http" + $rootScope.authToken);
             
         if ($rootScope.authToken) 
         {
-            console.log("sending token with http" + $rootScope.authToken);
+            console.log("sending auth token: " + $rootScope.authToken);
             headersGetter()['Authorization'] = $rootScope.authToken;
         }
         if (data) {
@@ -131,6 +134,7 @@ angular.module('dgs').run(function ($rootScope,$injector, AUTH_EVENTS, authServi
 
   $rootScope.$on('$stateChangeStart', function (event, next) {
     
+    //console.log(next);
     //console.log(next.url);
 
     if(typeof(next.isPublic)!=='undefined' && next.isPublic===true){
@@ -143,6 +147,16 @@ angular.module('dgs').run(function ($rootScope,$injector, AUTH_EVENTS, authServi
       $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
       console.log("User not logged in so show him the login page");
       $state.go("login");
+    }else
+    {
+      //User is authenticated but now lets check if he has proper rights to
+      // visit this url
+      if(!authService.hasPermissions(next.name))
+      {
+        $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+        console.log("User not authorized to view "+next.name);
+        //$state.go("home");
+      }
     }
 
 

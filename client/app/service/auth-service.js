@@ -56,6 +56,24 @@ angular.module('dgs').factory('authService',function($http,session) {
 		return authService.isAuthenticated();
 	};
 
+	authService.hasPermissions = function(permission_name,rights){
+		permission_name = typeof permission_name !== 'undefined'?permission_name:'';
+		rights = typeof rights !== 'undefined'? rights:1;
+		var currentUser = session.currentUser();
+		if(currentUser)
+		{
+			for(x in currentUser.role.permissions){
+				if(currentUser.role.permissions[x].name==permission_name)
+				{
+					//rights checking here
+					return true;
+				}
+			}
+		}
+
+		return false;
+	};
+
 	return authService;
 
 });
