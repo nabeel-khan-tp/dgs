@@ -31,7 +31,8 @@ class UsersController < ApplicationController
       @permissions = @role.permissions
       @permissions_info = []
       @permissions.each do |p|
-        @permissions_info.push(id: p.id, name: p.name)
+        rights = RolesToPermissions.where(:role_id => @role.id, :permission_id => Permission.find(p)).first.rights
+        @permissions_info.push(id: p.id, name: p.name, rights: rights)
       end
       @role_info.merge!(id: @role.id, name: @role.name, permissions: @permissions_info)
       @user_info = {id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, role: @role_info}
